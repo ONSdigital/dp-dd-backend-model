@@ -1,8 +1,18 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -351,6 +361,22 @@ public class DimensionalDataSet implements Serializable {
 
     public void setDimensionalDataPoints(List<DimensionalDataPoint> dimensionalDataPoints) {
         this.dimensionalDataPoints = dimensionalDataPoints;
+    }
+
+    /**
+     * Returns a list of all {@link Variable}s that are referenced by any {@link DimensionalDataPoint} in this data set.
+     *
+     * @return the list of all referenced variables.
+     */
+    public Collection<Variable> getReferencedVariables() {
+        // TODO: make this efficient!
+        final Map<Long, Variable> referencedVariables = new HashMap<>();
+        for (DimensionalDataPoint dataPoint : this.getDimensionalDataPoints()) {
+            final Variable variable = dataPoint.getVariable();
+            referencedVariables.put(variable.getVariableId(), variable);
+        }
+
+        return referencedVariables.values();
     }
 
     public DimensionalDataPoint addDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
