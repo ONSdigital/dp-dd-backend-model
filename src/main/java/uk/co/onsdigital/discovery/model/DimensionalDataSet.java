@@ -109,7 +109,7 @@ public class DimensionalDataSet implements Serializable {
     private List<Presentation> presentations;
 
     @ManyToMany
-    @JoinTable(name = "dimensional_data_set_variable", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
+    @JoinTable(name = "dimensional_data_set_concept_system", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
         inverseJoinColumns = @JoinColumn(name = "concept_system"))
     private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
 
