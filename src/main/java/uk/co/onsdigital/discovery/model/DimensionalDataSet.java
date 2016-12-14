@@ -111,7 +111,7 @@ public class DimensionalDataSet implements Serializable {
     @ManyToMany
     @JoinTable(name = "dimensional_data_set_variable", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
         inverseJoinColumns = @JoinColumn(name = "variable_id"))
-    private Set<Variable> referencedVariables;
+    private Set<Variable> referencedVariables = new HashSet<>();
 
     public DimensionalDataSet() {
     }
