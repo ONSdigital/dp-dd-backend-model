@@ -87,6 +87,6 @@ public class ConceptSystem implements Serializable {
 
     @Override
     public int hashCode() {
-        return conceptSystem.hashCode();
+        return Objects.hash(conceptSystem);
     }
 }
