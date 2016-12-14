@@ -4,15 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -106,6 +107,11 @@ public class DimensionalDataSet implements Serializable {
     //bi-directional many-to-one association to Presentation
     @OneToMany(mappedBy="dimensionalDataSet")
     private List<Presentation> presentations;
+
+    @ManyToMany
+    @JoinTable(name = "dimensional_data_set_variable", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
+        inverseJoinColumns = @JoinColumn(name = "variable_id"))
+    private Set<Variable> referencedVariables;
 
     public DimensionalDataSet() {
     }
@@ -368,15 +374,19 @@ public class DimensionalDataSet implements Serializable {
      *
      * @return the list of all referenced variables.
      */
-    public Collection<Variable> getReferencedVariables() {
-        // TODO: make this efficient!
-        final Map<Long, Variable> referencedVariables = new HashMap<>();
-        for (DimensionalDataPoint dataPoint : this.getDimensionalDataPoints()) {
-            final Variable variable = dataPoint.getVariable();
-            referencedVariables.put(variable.getVariableId(), variable);
-        }
+    public Set<Variable> getReferencedVariables() {
+        return referencedVariables;
+    }
 
-        return referencedVariables.values();
+    public void setReferencedVariables(Set<Variable> variables) {
+        this.referencedVariables = variables;
+    }
+
+    public void addReferencedVariable(Variable variable) {
+        if (referencedVariables == null) {
+            referencedVariables = new HashSet<>();
+        }
+        referencedVariables.add(variable);
     }
 
     public DimensionalDataPoint addDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
