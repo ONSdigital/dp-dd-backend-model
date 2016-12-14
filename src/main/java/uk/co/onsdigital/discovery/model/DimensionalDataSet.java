@@ -110,8 +110,8 @@ public class DimensionalDataSet implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "dimensional_data_set_variable", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
-        inverseJoinColumns = @JoinColumn(name = "variable_id"))
-    private Set<Variable> referencedVariables = new HashSet<>();
+        inverseJoinColumns = @JoinColumn(name = "concept_system"))
+    private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
 
     public DimensionalDataSet() {
     }
@@ -370,23 +370,24 @@ public class DimensionalDataSet implements Serializable {
     }
 
     /**
-     * Returns a list of all {@link Variable}s that are referenced by any {@link DimensionalDataPoint} in this data set.
+     * Returns a list of all {@link ConceptSystem}s that are referenced by any {@link DimensionalDataPoint} in this
+     * data set. These are the <em>dimensions</em> of the data set in terms of the UI.
      *
-     * @return the list of all referenced variables.
+     * @return the list of all referenced concept systems.
      */
-    public Set<Variable> getReferencedVariables() {
-        return referencedVariables;
+    public Set<ConceptSystem> getReferencedConceptSystems() {
+        return referencedConceptSystems;
     }
 
-    public void setReferencedVariables(Set<Variable> variables) {
-        this.referencedVariables = variables;
+    public void setReferencedConceptSystems(Set<ConceptSystem> conceptSystems) {
+        this.referencedConceptSystems = conceptSystems;
     }
 
-    public void addReferencedVariable(Variable variable) {
-        if (referencedVariables == null) {
-            referencedVariables = new HashSet<>();
+    public void addReferencedConceptSystem(ConceptSystem conceptSystem) {
+        if (referencedConceptSystems == null) {
+            referencedConceptSystems = new HashSet<>();
         }
-        referencedVariables.add(variable);
+        referencedConceptSystems.add(conceptSystem);
     }
 
     public DimensionalDataPoint addDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
