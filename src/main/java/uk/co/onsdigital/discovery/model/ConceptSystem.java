@@ -1,7 +1,15 @@
 package uk.co.onsdigital.discovery.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -15,7 +23,7 @@ public class ConceptSystem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="concept_system")
+    @Column(name="concept_system", nullable = false)
     private String conceptSystem;
 
     //bi-directional many-to-one association to Category
@@ -71,4 +79,14 @@ public class ConceptSystem implements Serializable {
         this.subjectFields = subjectFields;
     }
 
+    @Override
+    public boolean equals(Object that) {
+        return this == that
+                || that instanceof ConceptSystem && Objects.equals(this.conceptSystem, ((ConceptSystem) that).conceptSystem);
+    }
+
+    @Override
+    public int hashCode() {
+        return conceptSystem.hashCode();
+    }
 }

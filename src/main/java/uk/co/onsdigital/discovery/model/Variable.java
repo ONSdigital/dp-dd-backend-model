@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 
 /**
@@ -37,7 +36,6 @@ public class Variable implements Serializable {
 
     private String metadata;
 
-    @Column(nullable = false, unique = true)
     private String name;
 
     //bi-directional many-to-one association to DimensionalDataPoint
@@ -150,15 +148,5 @@ public class Variable implements Serializable {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        return this == that || (that instanceof Variable) && Objects.equals(this.name, ((Variable) that).name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.name);
     }
 }
