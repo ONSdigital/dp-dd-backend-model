@@ -11,12 +11,16 @@ import java.util.List;
  */
 @Entity
 @Table(name="geographic_area")
-@NamedQuery(name="GeographicArea.findAll", query="SELECT g FROM GeographicArea g")
+@NamedQueries({
+        @NamedQuery(name="GeographicArea.findAll", query="SELECT g FROM GeographicArea g"),
+        @NamedQuery(name="GeographicArea.findByExtCode", query="SELECT g FROM GeographicArea g WHERE g.extCode = :extCode")
+
+})
 public class GeographicArea implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator( name = "areaseq", sequenceName = "areaseq", allocationSize = 1, initialValue = 1 )
+    @SequenceGenerator( name = "areaseq", sequenceName = "areaseq", allocationSize = 1000)
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "areaseq" )
     @Column(name="geographic_area_id")
     private Long geographicAreaId;

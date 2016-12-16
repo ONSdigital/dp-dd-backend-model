@@ -14,7 +14,7 @@ public class Presentation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator( name = "presseq", sequenceName = "presseq", allocationSize = 1, initialValue = 1 )
+    @SequenceGenerator( name = "presseq", sequenceName = "presseq", allocationSize = 1000 )
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "presseq" )
     @Column(name="presentation_id")
     private Long presentationId;

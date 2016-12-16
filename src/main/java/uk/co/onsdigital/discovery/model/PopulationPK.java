@@ -20,6 +20,12 @@ public class PopulationPK implements Serializable {
 
     public PopulationPK() {
     }
+
+    public PopulationPK(Long geographicAreaId, Long timePeriodId) {
+        this.geographicAreaId = geographicAreaId;
+        this.timePeriodId = timePeriodId;
+    }
+
     public Long getGeographicAreaId() {
         return this.geographicAreaId;
     }

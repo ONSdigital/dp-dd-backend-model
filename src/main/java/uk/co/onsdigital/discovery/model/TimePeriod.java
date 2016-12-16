@@ -12,12 +12,15 @@ import java.util.List;
  */
 @Entity
 @Table(name="time_period")
-@NamedQuery(name="TimePeriod.findAll", query="SELECT t FROM TimePeriod t")
+@NamedQueries({
+        @NamedQuery(name="TimePeriod.findAll", query="SELECT t FROM TimePeriod t"),
+        @NamedQuery(name="TimePeriod.findByName", query = "SELECT t FROM TimePeriod t WHERE t.name = :name")
+})
 public class TimePeriod implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator( name = "timeseq", sequenceName = "timeseq", allocationSize = 1, initialValue = 1 )
+    @SequenceGenerator( name = "timeseq", sequenceName = "timeseq", allocationSize = 1000 )
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "timeseq" )
     @Column(name="time_period_id")
     private Long timePeriodId;
