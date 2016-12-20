@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,7 +24,10 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="dimensional_data_set")
-@NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d")
+@NamedQueries({
+        @NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d ORDER BY d.title"),
+        @NamedQuery(name="DimensionalDataSet.count", query="SELECT COUNT(d) FROM DimensionalDataSet d")
+})
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
