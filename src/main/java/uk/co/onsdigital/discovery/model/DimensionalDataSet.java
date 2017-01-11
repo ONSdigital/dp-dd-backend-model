@@ -25,7 +25,7 @@ import java.util.UUID;
 @Entity
 @Table(name="dimensional_data_set")
 @NamedQueries({
-        @NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d ORDER BY d.title"),
+        @NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
         @NamedQuery(name="DimensionalDataSet.count", query="SELECT COUNT(d) FROM DimensionalDataSet d")
 })
 public class DimensionalDataSet implements Serializable {
@@ -81,7 +81,8 @@ public class DimensionalDataSet implements Serializable {
 
     private String theme;
 
-    private String title;
+    @Column(name = "s3_url")
+    private String s3URL;
 
     @Column(name="validation_exception")
     private String validationException;
@@ -120,8 +121,8 @@ public class DimensionalDataSet implements Serializable {
     public DimensionalDataSet() {
     }
 
-    public DimensionalDataSet(String title, DataResource dataResourceBean) {
-        this.title = title;
+    public DimensionalDataSet(String s3URL, DataResource dataResourceBean) {
+        this.s3URL = s3URL;
         this.dataResourceBean = dataResourceBean;
     }
 
@@ -301,12 +302,12 @@ public class DimensionalDataSet implements Serializable {
         this.theme = theme;
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getS3URL() {
+        return this.s3URL;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setS3URL(String s3URL) {
+        this.s3URL = s3URL;
     }
 
     public String getValidationException() {
