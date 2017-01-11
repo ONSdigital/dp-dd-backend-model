@@ -64,6 +64,12 @@ public class DimensionalDataSet implements Serializable {
 
     private String metadata;
 
+    @Column(name="major_version")
+    private int majorVersion;
+
+    @Column(name="minor_version")
+    private int minorVersion;
+
     private String modified;
 
     private Long obscount;
@@ -72,6 +78,12 @@ public class DimensionalDataSet implements Serializable {
 
     @Column(name="reference_list")
     private String references;
+
+    @Column(name="revision_notes")
+    private String revisionNotes;
+
+    @Column(name="revision_reason")
+    private String revisionReason;
 
     private String spatial;
 
@@ -237,6 +249,22 @@ public class DimensionalDataSet implements Serializable {
         this.metadata = metadata;
     }
 
+    public int getMajorVersion() {
+        return this.majorVersion;
+    }
+
+    public void setMajorVersion(int majorVersion) {
+        this.majorVersion = majorVersion;
+    }
+
+    public int getMinorVersion() {
+        return this.minorVersion;
+    }
+
+    public void setMinorVersion(int minorVersion) {
+        this.minorVersion = minorVersion;
+    }
+
     public String getModified() {
         return this.modified;
     }
@@ -267,6 +295,22 @@ public class DimensionalDataSet implements Serializable {
 
     public void setReferences(String references) {
         this.references = references;
+    }
+
+    public String getRevisionNotes(String revisionNotes) {
+        return this.revisionNotes;
+    }
+
+    public void setRevisionNotes(String revisionNotes) {
+        this.revisionNotes = revisionNotes;
+    }
+
+    public String getRevisionReason(String revisionReason) {
+        return this.revisionReason;
+    }
+
+    public void setRevisionReason(String revisionReason) {
+        this.revisionReason = revisionReason;
     }
 
     public String getSpatial() {
