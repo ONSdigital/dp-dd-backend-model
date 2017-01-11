@@ -64,11 +64,11 @@ public class DimensionalDataSet implements Serializable {
 
     private String metadata;
 
-    @Column(name="major_version")
+    @Column(name="major_version", nullable=false)
     private int majorVersion;
 
     @Column(name="minor_version")
-    private int minorVersion;
+    private int minorVersion = 0;
 
     private String modified;
 
