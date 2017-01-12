@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 
 /**
@@ -437,6 +438,17 @@ public class DimensionalDataSet implements Serializable {
             referencedConceptSystems = new HashSet<>();
         }
         referencedConceptSystems.add(conceptSystem);
+    }
+
+    public Stream<GeographicAreaHierarchy> getReferencedGeographies() {
+        if (getDimensionalDataPoints() != null) {
+            // FIXME: need to populate this during load instead of scanning the entire data point table
+            return getDimensionalDataPoints().parallelStream()
+                    .unordered()
+                    .map(point -> point.getPopulation().getGeographicArea().getGeographicAreaHierarchyBean())
+                    .distinct();
+        }
+        return Stream.empty();
     }
 
     public DimensionalDataPoint addDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
