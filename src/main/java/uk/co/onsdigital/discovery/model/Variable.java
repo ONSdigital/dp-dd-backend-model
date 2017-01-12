@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -21,12 +22,15 @@ import java.util.List;
  *
  */
 @Entity
-@NamedQuery(name="Variable.findAll", query="SELECT v FROM Variable v")
+@NamedQueries({
+        @NamedQuery(name="Variable.findAll", query="SELECT v FROM Variable v"),
+        @NamedQuery(name="Variable.findByName", query = "SELECT v FROM Variable v WHERE v.name = :name")
+})
 public class Variable implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator( name = "varseq", sequenceName = "varseq", allocationSize = 1, initialValue = 1 )
+    @SequenceGenerator( name = "varseq", sequenceName = "varseq", allocationSize = 1000 )
     @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "varseq" )
     @Column(name="variable_id")
     private Long variableId;
