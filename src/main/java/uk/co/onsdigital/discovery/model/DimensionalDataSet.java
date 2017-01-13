@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 @Entity
 @Table(name="dimensional_data_set")
 @NamedQueries({
-        @NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
+        @NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d ORDER BY d.title"),
         @NamedQuery(name="DimensionalDataSet.count", query="SELECT COUNT(d) FROM DimensionalDataSet d")
 })
 public class DimensionalDataSet implements Serializable {
@@ -96,6 +96,9 @@ public class DimensionalDataSet implements Serializable {
 
     @Column(name = "s3_url")
     private String s3URL;
+
+    @Column(name= "title")
+    private String title;
 
     @Column(name="validation_exception")
     private String validationException;
@@ -349,6 +352,14 @@ public class DimensionalDataSet implements Serializable {
 
     public String getS3URL() {
         return this.s3URL;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setS3URL(String s3URL) {
