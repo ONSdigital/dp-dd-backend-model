@@ -18,25 +18,23 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-
 /**
  * The persistent class for the dimensional_data_set database table.
- *
  */
 @Entity
-@Table(name="dimensional_data_set")
+@Table(name = "dimensional_data_set")
 @NamedQueries({
-        @NamedQuery(name="DimensionalDataSet.findAll", query="SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
-        @NamedQuery(name="DimensionalDataSet.count", query="SELECT COUNT(d) FROM DimensionalDataSet d")
+        @NamedQuery(name = "DimensionalDataSet.findAll", query = "SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
+        @NamedQuery(name = "DimensionalDataSet.count", query = "SELECT COUNT(d) FROM DimensionalDataSet d")
 })
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="dimensional_data_set_id", columnDefinition = "uuid")
+    @Column(name = "dimensional_data_set_id", columnDefinition = "uuid")
     private UUID dimensionalDataSetId;
 
-    @Column(name="authentication_role")
+    @Column(name = "authentication_role")
     private String authenticationRole;
 
     private String description;
@@ -49,7 +47,7 @@ public class DimensionalDataSet implements Serializable {
 
     private String issued;
 
-    @Column(name="json_metadata")
+    @Column(name = "json_metadata")
     private String jsonMetadata;
 
     private String keyword;
@@ -60,15 +58,15 @@ public class DimensionalDataSet implements Serializable {
 
     private String license;
 
-    @Column(name="load_exception")
+    @Column(name = "load_exception")
     private String loadException;
 
     private String metadata;
 
-    @Column(name="major_version", nullable=false)
+    @Column(name = "major_version", nullable = false)
     private int majorVersion;
 
-    @Column(name="minor_version")
+    @Column(name = "minor_version")
     private int minorVersion = 0;
 
     private String modified;
@@ -77,13 +75,13 @@ public class DimensionalDataSet implements Serializable {
 
     private String publisher;
 
-    @Column(name="reference_list")
+    @Column(name = "reference_list")
     private String references;
 
-    @Column(name="revision_notes")
+    @Column(name = "revision_notes")
     private String revisionNotes;
 
-    @Column(name="revision_reason")
+    @Column(name = "revision_reason")
     private String revisionReason;
 
     private String spatial;
@@ -100,10 +98,10 @@ public class DimensionalDataSet implements Serializable {
     @Column(name = "s3_url")
     private String s3URL;
 
-    @Column(name="validation_exception")
+    @Column(name = "validation_exception")
     private String validationException;
 
-    @Column(name="validation_message")
+    @Column(name = "validation_message")
     private String validationMessage;
 
     private String source;
@@ -117,21 +115,21 @@ public class DimensionalDataSet implements Serializable {
     private String nextRelease;
 
     //bi-directional many-to-one association to DimensionalDataPoint
-    @OneToMany(mappedBy="dimensionalDataSet")
+    @OneToMany(mappedBy = "dimensionalDataSet")
     private List<DimensionalDataPoint> dimensionalDataPoints;
 
     //bi-directional many-to-one association to DataResource
     @ManyToOne
-    @JoinColumn(name="data_resource")
+    @JoinColumn(name = "data_resource")
     private DataResource dataResourceBean;
 
     //bi-directional many-to-one association to Presentation
-    @OneToMany(mappedBy="dimensionalDataSet")
+    @OneToMany(mappedBy = "dimensionalDataSet")
     private List<Presentation> presentations;
 
     @ManyToMany
     @JoinTable(name = "dimensional_data_set_concept_system", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
-        inverseJoinColumns = @JoinColumn(name = "concept_system"))
+            inverseJoinColumns = @JoinColumn(name = "concept_system"))
     private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
 
     public DimensionalDataSet() {
@@ -382,43 +380,35 @@ public class DimensionalDataSet implements Serializable {
         this.validationMessage = validationMessage;
     }
 
-    public String getSource()
-    {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(String source)
-    {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public String getContact()
-    {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(String contact)
-    {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
-    public String getReleaseDate()
-    {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate)
-    {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public String getNextRelease()
-    {
+    public String getNextRelease() {
         return nextRelease;
     }
 
-    public void setNextRelease(String nextRelease)
-    {
+    public void setNextRelease(String nextRelease) {
         this.nextRelease = nextRelease;
     }
 

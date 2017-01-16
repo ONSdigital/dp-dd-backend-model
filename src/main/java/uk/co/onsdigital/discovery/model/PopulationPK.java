@@ -1,34 +1,38 @@
 package uk.co.onsdigital.discovery.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
-import javax.persistence.*;
 
 /**
  * The primary key class for the population database table.
- *
  */
 @Embeddable
 public class PopulationPK implements Serializable {
     //default serial version id, required for serializable classes.
     private static final long serialVersionUID = 1L;
 
-    @Column(name="geographic_area_id", insertable=false, updatable=false)
+    @Column(name = "geographic_area_id", insertable = false, updatable = false)
     private Long geographicAreaId;
 
-    @Column(name="time_period_id", insertable=false, updatable=false)
+    @Column(name = "time_period_id", insertable = false, updatable = false)
     private Long timePeriodId;
 
     public PopulationPK() {
     }
+
     public Long getGeographicAreaId() {
         return this.geographicAreaId;
     }
+
     public void setGeographicAreaId(Long geographicAreaId) {
         this.geographicAreaId = geographicAreaId;
     }
+
     public Long getTimePeriodId() {
         return this.timePeriodId;
     }
+
     public void setTimePeriodId(Long timePeriodId) {
         this.timePeriodId = timePeriodId;
     }
@@ -40,7 +44,7 @@ public class PopulationPK implements Serializable {
         if (!(other instanceof PopulationPK)) {
             return false;
         }
-        PopulationPK castOther = (PopulationPK)other;
+        PopulationPK castOther = (PopulationPK) other;
         return
                 this.geographicAreaId.equals(castOther.geographicAreaId)
                         && this.timePeriodId.equals(castOther.timePeriodId);
