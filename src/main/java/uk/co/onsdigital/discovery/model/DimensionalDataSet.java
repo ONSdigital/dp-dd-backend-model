@@ -92,6 +92,9 @@ public class DimensionalDataSet implements Serializable {
 
     private String theme;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "s3_url")
     private String s3URL;
 
@@ -351,6 +354,14 @@ public class DimensionalDataSet implements Serializable {
 
     public void setS3URL(String s3URL) {
         this.s3URL = s3URL;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getValidationException() {
