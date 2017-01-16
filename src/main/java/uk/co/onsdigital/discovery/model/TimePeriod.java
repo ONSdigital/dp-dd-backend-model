@@ -1,7 +1,7 @@
 package uk.co.onsdigital.discovery.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  */
 @Entity
-@Table(name="time_period")
+@Table(name="time_period", indexes = {@Index(columnList="name")})
 @NamedQuery(name="TimePeriod.findAll", query="SELECT t FROM TimePeriod t")
 public class TimePeriod implements Serializable {
     private static final long serialVersionUID = 1L;

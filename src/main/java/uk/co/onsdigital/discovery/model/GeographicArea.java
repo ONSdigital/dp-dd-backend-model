@@ -10,7 +10,7 @@ import java.util.List;
  *
  */
 @Entity
-@Table(name="geographic_area")
+@Table(name="geographic_area", indexes = {@Index(columnList="ext_code")})
 @NamedQuery(name="GeographicArea.findAll", query="SELECT g FROM GeographicArea g")
 public class GeographicArea implements Serializable {
     private static final long serialVersionUID = 1L;

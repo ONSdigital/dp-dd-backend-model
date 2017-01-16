@@ -1,7 +1,7 @@
 package uk.co.onsdigital.discovery.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,6 +10,8 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@Table(indexes = {@Index(columnList="name,concept_system")},
+        uniqueConstraints=@UniqueConstraint(columnNames={"name,concept_system"}))
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
