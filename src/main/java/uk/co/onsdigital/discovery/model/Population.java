@@ -1,37 +1,41 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * The persistent class for the population database table.
- *
  */
 @Entity
-@NamedQuery(name="Population.findAll", query="SELECT p FROM Population p")
+@NamedQuery(name = "Population.findAll", query = "SELECT p FROM Population p")
 public class Population implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
     private PopulationPK id;
 
-    @Column(name="geographic_area_ext_code")
+    @Column(name = "geographic_area_ext_code")
     private String geographicAreaExtCode;
 
     //bi-directional many-to-one association to DimensionalDataPoint
-    @OneToMany(mappedBy="population")
+    @OneToMany(mappedBy = "population")
     private List<DimensionalDataPoint> dimensionalDataPoints;
 
     //bi-directional many-to-one association to GeographicArea
     @ManyToOne
-    @JoinColumn(name="geographic_area_id")
+    @JoinColumn(name = "geographic_area_id")
     private GeographicArea geographicArea;
 
     //bi-directional many-to-one association to TimePeriod
     @ManyToOne
-    @JoinColumn(name="time_period_id")
+    @JoinColumn(name = "time_period_id")
     private TimePeriod timePeriod;
 
     public Population() {

@@ -1,43 +1,51 @@
 package uk.co.onsdigital.discovery.model;
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * The persistent class for the subject_field database table.
- *
  */
 @Entity
-@Table(name="subject_field")
-@NamedQuery(name="SubjectField.findAll", query="SELECT s FROM SubjectField s")
+@Table(name = "subject_field")
+@NamedQuery(name = "SubjectField.findAll", query = "SELECT s FROM SubjectField s")
 public class SubjectField implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="subject_field")
+    @Column(name = "subject_field")
     private String subjectField;
 
     private String metadata;
 
     //bi-directional many-to-one association to SubjectField
     @ManyToOne
-    @JoinColumn(name="rel_subject_field")
+    @JoinColumn(name = "rel_subject_field")
     private SubjectField subjectFieldBean;
 
     //bi-directional many-to-one association to SubjectField
-    @OneToMany(mappedBy="subjectFieldBean")
+    @OneToMany(mappedBy = "subjectFieldBean")
     private List<SubjectField> subjectFields;
 
     //bi-directional many-to-many association to ConceptSystem
     @ManyToMany
     @JoinTable(
-            name="subject_field_concept_system"
-            , joinColumns={
-            @JoinColumn(name="subject_field")
+            name = "subject_field_concept_system"
+            , joinColumns = {
+            @JoinColumn(name = "subject_field")
     }
-            , inverseJoinColumns={
-            @JoinColumn(name="concept_system")
+            , inverseJoinColumns = {
+            @JoinColumn(name = "concept_system")
     }
     )
     private List<ConceptSystem> conceptSystems;

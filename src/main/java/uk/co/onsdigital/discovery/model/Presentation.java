@@ -1,22 +1,28 @@
 package uk.co.onsdigital.discovery.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import java.io.Serializable;
-import javax.persistence.*;
-
 
 /**
  * The persistent class for the presentation database table.
- *
  */
 @Entity
-@NamedQuery(name="Presentation.findAll", query="SELECT p FROM Presentation p")
+@NamedQuery(name = "Presentation.findAll", query = "SELECT p FROM Presentation p")
 public class Presentation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator( name = "presseq", sequenceName = "presseq", allocationSize = 1, initialValue = 1 )
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "presseq" )
-    @Column(name="presentation_id")
+    @SequenceGenerator(name = "presseq", sequenceName = "presseq", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "presseq")
+    @Column(name = "presentation_id")
     private Long presentationId;
 
     private String accessurl;
@@ -27,18 +33,18 @@ public class Presentation implements Serializable {
 
     private String downloadurl;
 
-    @Column(name="file_data")
+    @Column(name = "file_data")
     private byte[] fileData;
 
-    @Column(name="file_name")
+    @Column(name = "file_name")
     private String fileName;
 
-    @Column(name="file_size")
+    @Column(name = "file_size")
     private Long fileSize;
 
     private String format;
 
-    @Column(name="json_metadata")
+    @Column(name = "json_metadata")
     private String jsonMetadata;
 
     private String spatial;
@@ -49,12 +55,12 @@ public class Presentation implements Serializable {
 
     //bi-directional many-to-one association to DimensionalDataSet
     @ManyToOne
-    @JoinColumn(name="dimensional_data_set_id")
+    @JoinColumn(name = "dimensional_data_set_id")
     private DimensionalDataSet dimensionalDataSet;
 
     //bi-directional many-to-one association to PresentationType
     @ManyToOne
-    @JoinColumn(name="presentation_type")
+    @JoinColumn(name = "presentation_type")
     private PresentationType presentationTypeBean;
 
     public Presentation() {

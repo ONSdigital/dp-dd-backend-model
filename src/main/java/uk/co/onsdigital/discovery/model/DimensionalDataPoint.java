@@ -1,55 +1,61 @@
 package uk.co.onsdigital.discovery.model;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
-
 
 /**
  * The persistent class for the dimensional_data_point database table.
- *
  */
 @Entity
-@Table(name="dimensional_data_point")
-@NamedQuery(name="DimensionalDataPoint.findAll", query="SELECT d FROM DimensionalDataPoint d")
+@Table(name = "dimensional_data_point")
+@NamedQuery(name = "DimensionalDataPoint.findAll", query = "SELECT d FROM DimensionalDataPoint d")
 public class DimensionalDataPoint implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
     private DimensionalDataPointPK id;
 
-    @Column(name="data_marking")
+    @Column(name = "data_marking")
     private String dataMarking;
 
-    @Column(name="observation_type_value")
+    @Column(name = "observation_type_value")
     private String observationTypeValue;
 
     private BigDecimal value;
 
     //bi-directional many-to-one association to DimensionalDataSet
     @ManyToOne
-    @JoinColumn(name="dimensional_data_set_id")
+    @JoinColumn(name = "dimensional_data_set_id")
     private DimensionalDataSet dimensionalDataSet;
 
     //bi-directional many-to-one association to ObservationType
     @ManyToOne
-    @JoinColumn(name="observation_type")
+    @JoinColumn(name = "observation_type")
     private ObservationType observationTypeBean;
 
     //bi-directional many-to-one association to Population
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name="geographic_area_id", referencedColumnName="geographic_area_id"),
-            @JoinColumn(name="time_period_id", referencedColumnName="time_period_id")
+            @JoinColumn(name = "geographic_area_id", referencedColumnName = "geographic_area_id"),
+            @JoinColumn(name = "time_period_id", referencedColumnName = "time_period_id")
     })
     private Population population;
 
     //bi-directional many-to-one association to Variable
     @ManyToOne
-    @JoinColumn(name="variable_id")
+    @JoinColumn(name = "variable_id")
     private Variable variable;
 
-    public DimensionalDataPoint() {}
+    public DimensionalDataPoint() {
+    }
 
     public DimensionalDataPoint(DimensionalDataSet dimensionalDataSet, BigDecimal value, Population population, Variable variable) {
         this.value = value;

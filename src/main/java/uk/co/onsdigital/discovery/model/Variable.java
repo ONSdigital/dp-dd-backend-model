@@ -1,27 +1,38 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * The persistent class for the variable database table.
- *
  */
 @Entity
-@NamedQuery(name="Variable.findAll", query="SELECT v FROM Variable v")
-@Table(indexes = {@Index(columnList="name")})
+@NamedQuery(name = "Variable.findAll", query = "SELECT v FROM Variable v")
+@Table(indexes = {@Index(columnList = "name")})
 public class Variable implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator( name = "varseq", sequenceName = "varseq", allocationSize = 1, initialValue = 1 )
-    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "varseq" )
-    @Column(name="variable_id")
+    @SequenceGenerator(name = "varseq", sequenceName = "varseq", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "varseq")
+    @Column(name = "variable_id")
     private Long variableId;
 
-    @Column(name="ext_code")
+    @Column(name = "ext_code")
     private String extCode;
 
     private String metadata;
@@ -29,28 +40,28 @@ public class Variable implements Serializable {
     private String name;
 
     //bi-directional many-to-one association to DimensionalDataPoint
-    @OneToMany(mappedBy="variable")
+    @OneToMany(mappedBy = "variable")
     private List<DimensionalDataPoint> dimensionalDataPoints;
 
     //bi-directional many-to-one association to UnitType
     @ManyToOne
-    @JoinColumn(name="unit_type")
+    @JoinColumn(name = "unit_type")
     private UnitType unitTypeBean;
 
     //bi-directional many-to-one association to ValueDomain
     @ManyToOne
-    @JoinColumn(name="value_domain")
+    @JoinColumn(name = "value_domain")
     private ValueDomain valueDomainBean;
 
     //bi-directional many-to-many association to Category
     @ManyToMany
     @JoinTable(
-            name="variable_category"
-            , joinColumns={
-            @JoinColumn(name="variable_id")
+            name = "variable_category"
+            , joinColumns = {
+            @JoinColumn(name = "variable_id")
     }
-            , inverseJoinColumns={
-            @JoinColumn(name="category_id")
+            , inverseJoinColumns = {
+            @JoinColumn(name = "category_id")
     }
     )
     private List<Category> categories;

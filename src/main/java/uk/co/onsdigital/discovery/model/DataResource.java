@@ -1,16 +1,25 @@
 package uk.co.onsdigital.discovery.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
 
 /**
  * The persistent class for the data_resource database table.
- *
  */
 @Entity
-@Table(name="data_resource")
-@NamedQuery(name="DataResource.findAll", query="SELECT d FROM DataResource d")
+@Table(name = "data_resource")
+@NamedQuery(name = "DataResource.findAll", query = "SELECT d FROM DataResource d")
 public class DataResource implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,15 +29,15 @@ public class DataResource implements Serializable {
     }
 
     @Id
-    @Column(name="data_resource")
+    @Column(name = "data_resource")
     private String dataResource;
 
-    @Column(name="column_concept")
+    @Column(name = "column_concept")
     private String columnConcept;
 
     private String metadata;
 
-    @Column(name="row_concept")
+    @Column(name = "row_concept")
     private String rowConcept;
 
     private String title;
@@ -36,18 +45,18 @@ public class DataResource implements Serializable {
     //bi-directional many-to-many association to Taxonomy
     @ManyToMany
     @JoinTable(
-            name="data_resource_taxonomy"
-            , joinColumns={
-            @JoinColumn(name="data_resource")
+            name = "data_resource_taxonomy"
+            , joinColumns = {
+            @JoinColumn(name = "data_resource")
     }
-            , inverseJoinColumns={
-            @JoinColumn(name="taxonomy")
+            , inverseJoinColumns = {
+            @JoinColumn(name = "taxonomy")
     }
     )
     private List<Taxonomy> taxonomies;
 
     //bi-directional many-to-one association to DimensionalDataSet
-    @OneToMany(mappedBy="dataResourceBean", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "dataResourceBean", cascade = CascadeType.PERSIST)
     private List<DimensionalDataSet> dimensionalDataSets;
 
     public DataResource() {
@@ -68,6 +77,7 @@ public class DataResource implements Serializable {
     public void setColumnConcept(String columnConcept) {
         this.columnConcept = columnConcept;
     }
+
     public String getMetadata() {
         return this.metadata;
     }
