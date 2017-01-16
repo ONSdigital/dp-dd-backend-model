@@ -1,28 +1,31 @@
 package uk.co.onsdigital.discovery.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
-
 
 /**
  * The persistent class for the geographic_level_type database table.
- *
  */
 @Entity
-@Table(name="geographic_level_type")
-@NamedQuery(name="GeographicLevelType.findAll", query="SELECT g FROM GeographicLevelType g")
+@Table(name = "geographic_level_type")
+@NamedQuery(name = "GeographicLevelType.findAll", query = "SELECT g FROM GeographicLevelType g")
 public class GeographicLevelType implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="geographic_level_type")
+    @Column(name = "geographic_level_type")
     private String geographicLevelType;
 
     private String metadata;
 
     //bi-directional many-to-one association to GeographicArea
-    @OneToMany(mappedBy="geographicLevelTypeBean")
+    @OneToMany(mappedBy = "geographicLevelTypeBean")
     private List<GeographicArea> geographicAreas;
 
     public GeographicLevelType() {

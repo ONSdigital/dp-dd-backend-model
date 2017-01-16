@@ -1,16 +1,20 @@
 package uk.co.onsdigital.discovery.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
-
 
 /**
  * The persistent class for the taxonomy database table.
- *
  */
 @Entity
-@NamedQuery(name="Taxonomy.findAll", query="SELECT t FROM Taxonomy t")
+@NamedQuery(name = "Taxonomy.findAll", query = "SELECT t FROM Taxonomy t")
 public class Taxonomy implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -20,16 +24,16 @@ public class Taxonomy implements Serializable {
     private String metadata;
 
     //bi-directional many-to-many association to DataResource
-    @ManyToMany(mappedBy="taxonomies")
+    @ManyToMany(mappedBy = "taxonomies")
     private List<DataResource> dataResources;
 
     //bi-directional many-to-one association to Taxonomy
     @ManyToOne
-    @JoinColumn(name="rel_taxonomy")
+    @JoinColumn(name = "rel_taxonomy")
     private Taxonomy taxonomyBean;
 
     //bi-directional many-to-one association to Taxonomy
-    @OneToMany(mappedBy="taxonomyBean")
+    @OneToMany(mappedBy = "taxonomyBean")
     private List<Taxonomy> taxonomies;
 
     public Taxonomy() {

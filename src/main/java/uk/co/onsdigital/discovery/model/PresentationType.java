@@ -1,26 +1,29 @@
 package uk.co.onsdigital.discovery.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
-
 
 /**
  * The persistent class for the presentation_type database table.
- *
  */
 @Entity
-@Table(name="presentation_type")
-@NamedQuery(name="PresentationType.findAll", query="SELECT p FROM PresentationType p")
+@Table(name = "presentation_type")
+@NamedQuery(name = "PresentationType.findAll", query = "SELECT p FROM PresentationType p")
 public class PresentationType implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="presentation_type")
+    @Column(name = "presentation_type")
     private String presentationType;
 
     //bi-directional many-to-one association to Presentation
-    @OneToMany(mappedBy="presentationTypeBean")
+    @OneToMany(mappedBy = "presentationTypeBean")
     private List<Presentation> presentations;
 
     public PresentationType() {
