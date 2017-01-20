@@ -1,17 +1,6 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,7 +9,9 @@ import java.util.List;
  * The persistent class for the geographic_area database table.
  */
 @Entity
-@Table(name = "geographic_area", indexes = {@Index(columnList = "ext_code")})
+@Table(name = "geographic_area", indexes = {@Index(columnList = "ext_code")},
+        uniqueConstraints=@UniqueConstraint(columnNames={"ext_code", "geographic_area_hierarchy"})
+)
 @NamedQuery(name = "GeographicArea.findAll", query = "SELECT g FROM GeographicArea g")
 public class GeographicArea implements Serializable {
     private static final long serialVersionUID = 1L;
