@@ -459,7 +459,7 @@ public class DimensionalDataSet implements Serializable {
     @Override
     public String toString() {
         return "DimensionalDataSet{" +
-                "dimensionalDataSetId=" + dimensionalDataSetId +
+                "dimensionalDataSetId=" + id +
                 ", majorVersion=" + majorVersion +
                 ", minorVersion=" + minorVersion +
                 ", title='" + title + '\'' +
