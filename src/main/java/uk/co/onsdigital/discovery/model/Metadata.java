@@ -33,7 +33,7 @@ public class Metadata {
     @Column
     private boolean nationalStatistics;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "associated_publications",
             joinColumns = @JoinColumn(name = "dimensional_data_set_id", columnDefinition = "uuid"))
     @Column(name = "associated_publication_url")
