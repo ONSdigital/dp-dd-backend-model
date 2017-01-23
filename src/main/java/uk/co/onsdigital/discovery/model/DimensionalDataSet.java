@@ -1,6 +1,7 @@
 package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,8 +38,6 @@ public class DimensionalDataSet implements Serializable {
     @Column(name = "authentication_role")
     private String authenticationRole;
 
-    private String description;
-
     private String distribution;
 
     private String frequency;
@@ -61,7 +60,8 @@ public class DimensionalDataSet implements Serializable {
     @Column(name = "load_exception")
     private String loadException;
 
-    private String metadata;
+    @Embedded
+    private Metadata metadata = new Metadata();
 
     @Column(name = "major_version", nullable = false)
     private int majorVersion;
@@ -106,14 +106,6 @@ public class DimensionalDataSet implements Serializable {
 
     private String source;
 
-    private String contact;
-
-    @Column(name = "release_date")
-    private String releaseDate;
-
-    @Column(name = "next_release")
-    private String nextRelease;
-
     //bi-directional many-to-one association to DimensionalDataPoint
     @OneToMany(mappedBy = "dimensionalDataSet")
     private List<DimensionalDataPoint> dimensionalDataPoints;
@@ -154,14 +146,6 @@ public class DimensionalDataSet implements Serializable {
 
     public void setAuthenticationRole(String authenticationRole) {
         this.authenticationRole = authenticationRole;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getDistribution() {
@@ -244,11 +228,11 @@ public class DimensionalDataSet implements Serializable {
         this.loadException = loadException;
     }
 
-    public String getMetadata() {
+    public Metadata getMetadata() {
         return this.metadata;
     }
 
-    public void setMetadata(String metadata) {
+    public void setMetadata(Metadata metadata) {
         this.metadata = metadata;
     }
 
@@ -388,30 +372,6 @@ public class DimensionalDataSet implements Serializable {
         this.source = source;
     }
 
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getNextRelease() {
-        return nextRelease;
-    }
-
-    public void setNextRelease(String nextRelease) {
-        this.nextRelease = nextRelease;
-    }
-
     public List<DimensionalDataPoint> getDimensionalDataPoints() {
         return this.dimensionalDataPoints;
     }
@@ -496,4 +456,15 @@ public class DimensionalDataSet implements Serializable {
         return presentation;
     }
 
+    @Override
+    public String toString() {
+        return "DimensionalDataSet{" +
+                "dimensionalDataSetId=" + dimensionalDataSetId +
+                ", majorVersion=" + majorVersion +
+                ", minorVersion=" + minorVersion +
+                ", title='" + title + '\'' +
+                ", s3URL='" + s3URL + '\'' +
+                ", metadata=" + metadata +
+                '}';
+    }
 }
