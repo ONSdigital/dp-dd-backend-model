@@ -2,6 +2,7 @@ package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,9 +10,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,7 +37,8 @@ public class DataResource implements Serializable {
     @Column(name = "column_concept")
     private String columnConcept;
 
-    private String metadata;
+    @Embedded
+    private Metadata metadata = new Metadata();
 
     @Column(name = "row_concept")
     private String rowConcept;
@@ -57,7 +59,8 @@ public class DataResource implements Serializable {
 
     //bi-directional many-to-one association to DimensionalDataSet
     @OneToMany(mappedBy = "dataResource", cascade = CascadeType.PERSIST)
-    private List<DimensionalDataSet> dimensionalDataSets = new ArrayList<>();
+    @OrderBy("majorVersion DESC, minorVersion DESC")
+    private List<DimensionalDataSet> dimensionalDataSets;
 
     public DataResource() {
     }
@@ -78,11 +81,11 @@ public class DataResource implements Serializable {
         this.columnConcept = columnConcept;
     }
 
-    public String getMetadata() {
+    public Metadata getMetadata() {
         return this.metadata;
     }
 
-    public void setMetadata(String metadata) {
+    public void setMetadata(Metadata metadata) {
         this.metadata = metadata;
     }
 
@@ -124,4 +127,12 @@ public class DataResource implements Serializable {
         return dimensionalDataSet;
     }
 
+    @Override
+    public String toString() {
+        return "DataResource{" +
+                "dataResource='" + id + '\'' +
+                ", metadata=" + metadata +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
