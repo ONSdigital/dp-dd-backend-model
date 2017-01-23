@@ -20,25 +20,25 @@ public class UnitType implements Serializable {
 
     @Id
     @Column(name = "unit_type")
-    private String unitType;
+    private String id;
 
     //bi-directional many-to-one association to Variable
-    @OneToMany(mappedBy = "unitTypeBean")
+    @OneToMany(mappedBy = "unitType")
     private List<Variable> variables;
 
     public UnitType() {
     }
 
-    public UnitType(String unitType) {
-        this.unitType = unitType;
+    public UnitType(String id) {
+        this.id = id;
     }
 
-    public String getUnitType() {
-        return this.unitType;
+    public String getId() {
+        return this.id;
     }
 
-    public void setUnitType(String unitType) {
-        this.unitType = unitType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<Variable> getVariables() {
@@ -51,14 +51,14 @@ public class UnitType implements Serializable {
 
     public Variable addVariable(Variable variable) {
         getVariables().add(variable);
-        variable.setUnitTypeBean(this);
+        variable.setUnitType(this);
 
         return variable;
     }
 
     public Variable removeVariable(Variable variable) {
         getVariables().remove(variable);
-        variable.setUnitTypeBean(null);
+        variable.setUnitType(null);
 
         return variable;
     }

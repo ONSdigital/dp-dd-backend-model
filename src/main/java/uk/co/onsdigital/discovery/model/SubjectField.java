@@ -24,17 +24,17 @@ public class SubjectField implements Serializable {
 
     @Id
     @Column(name = "subject_field")
-    private String subjectField;
+    private String id;
 
     private String metadata;
 
     //bi-directional many-to-one association to SubjectField
     @ManyToOne
     @JoinColumn(name = "rel_subject_field")
-    private SubjectField subjectFieldBean;
+    private SubjectField subjectField;
 
     //bi-directional many-to-one association to SubjectField
-    @OneToMany(mappedBy = "subjectFieldBean")
+    @OneToMany(mappedBy = "subjectField")
     private List<SubjectField> subjectFields;
 
     //bi-directional many-to-many association to ConceptSystem
@@ -53,12 +53,12 @@ public class SubjectField implements Serializable {
     public SubjectField() {
     }
 
-    public String getSubjectField() {
-        return this.subjectField;
+    public String getId() {
+        return this.id;
     }
 
-    public void setSubjectField(String subjectField) {
-        this.subjectField = subjectField;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMetadata() {
@@ -69,12 +69,12 @@ public class SubjectField implements Serializable {
         this.metadata = metadata;
     }
 
-    public SubjectField getSubjectFieldBean() {
-        return this.subjectFieldBean;
+    public SubjectField getSubjectField() {
+        return this.subjectField;
     }
 
-    public void setSubjectFieldBean(SubjectField subjectFieldBean) {
-        this.subjectFieldBean = subjectFieldBean;
+    public void setSubjectField(SubjectField subjectField) {
+        this.subjectField = subjectField;
     }
 
     public List<SubjectField> getSubjectFields() {
@@ -87,14 +87,14 @@ public class SubjectField implements Serializable {
 
     public SubjectField addSubjectField(SubjectField subjectField) {
         getSubjectFields().add(subjectField);
-        subjectField.setSubjectFieldBean(this);
+        subjectField.setSubjectField(this);
 
         return subjectField;
     }
 
     public SubjectField removeSubjectField(SubjectField subjectField) {
         getSubjectFields().remove(subjectField);
-        subjectField.setSubjectFieldBean(null);
+        subjectField.setSubjectField(null);
 
         return subjectField;
     }

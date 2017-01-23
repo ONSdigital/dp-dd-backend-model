@@ -20,21 +20,21 @@ public class GeographicAreaType implements Serializable {
 
     @Id
     @Column(name = "geographic_area_type")
-    private String geographicAreaType;
+    private String id;
 
     //bi-directional many-to-one association to GeographicArea
-    @OneToMany(mappedBy = "geographicAreaTypeBean")
+    @OneToMany(mappedBy = "geographicAreaType")
     private List<GeographicArea> geographicAreas;
 
     public GeographicAreaType() {
     }
 
-    public String getGeographicAreaType() {
-        return this.geographicAreaType;
+    public String getId() {
+        return this.id;
     }
 
-    public void setGeographicAreaType(String geographicAreaType) {
-        this.geographicAreaType = geographicAreaType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<GeographicArea> getGeographicAreas() {
@@ -47,14 +47,14 @@ public class GeographicAreaType implements Serializable {
 
     public GeographicArea addGeographicArea(GeographicArea geographicArea) {
         getGeographicAreas().add(geographicArea);
-        geographicArea.setGeographicAreaTypeBean(this);
+        geographicArea.setGeographicAreaType(this);
 
         return geographicArea;
     }
 
     public GeographicArea removeGeographicArea(GeographicArea geographicArea) {
         getGeographicAreas().remove(geographicArea);
-        geographicArea.setGeographicAreaTypeBean(null);
+        geographicArea.setGeographicAreaType(null);
 
         return geographicArea;
     }

@@ -30,7 +30,7 @@ public class Variable implements Serializable {
     @SequenceGenerator(name = "varseq", sequenceName = "varseq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "varseq")
     @Column(name = "variable_id")
-    private Long variableId;
+    private Long id;
 
     @Column(name = "ext_code")
     private String extCode;
@@ -46,12 +46,12 @@ public class Variable implements Serializable {
     //bi-directional many-to-one association to UnitType
     @ManyToOne
     @JoinColumn(name = "unit_type")
-    private UnitType unitTypeBean;
+    private UnitType unitType;
 
     //bi-directional many-to-one association to ValueDomain
     @ManyToOne
     @JoinColumn(name = "value_domain")
-    private ValueDomain valueDomainBean;
+    private ValueDomain valueDomain;
 
     //bi-directional many-to-many association to Category
     @ManyToMany
@@ -73,12 +73,12 @@ public class Variable implements Serializable {
         this.name = name;
     }
 
-    public Long getVariableId() {
-        return this.variableId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setVariableId(Long variableId) {
-        this.variableId = variableId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getExtCode() {
@@ -127,20 +127,20 @@ public class Variable implements Serializable {
         return dimensionalDataPoint;
     }
 
-    public UnitType getUnitTypeBean() {
-        return this.unitTypeBean;
+    public UnitType getUnitType() {
+        return this.unitType;
     }
 
-    public void setUnitTypeBean(UnitType unitTypeBean) {
-        this.unitTypeBean = unitTypeBean;
+    public void setUnitType(UnitType unitType) {
+        this.unitType = unitType;
     }
 
-    public ValueDomain getValueDomainBean() {
-        return this.valueDomainBean;
+    public ValueDomain getValueDomain() {
+        return this.valueDomain;
     }
 
-    public void setValueDomainBean(ValueDomain valueDomainBean) {
-        this.valueDomainBean = valueDomainBean;
+    public void setValueDomain(ValueDomain valueDomain) {
+        this.valueDomain = valueDomain;
     }
 
     public List<Category> getCategories() {

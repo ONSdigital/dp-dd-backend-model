@@ -20,21 +20,21 @@ public class TimeType implements Serializable {
 
     @Id
     @Column(name = "time_type")
-    private String timeType;
+    private String id;
 
     //bi-directional many-to-one association to TimePeriod
-    @OneToMany(mappedBy = "timeTypeBean")
+    @OneToMany(mappedBy = "timeType")
     private List<TimePeriod> timePeriods;
 
     public TimeType() {
     }
 
-    public String getTimeType() {
-        return this.timeType;
+    public String getId() {
+        return this.id;
     }
 
-    public void setTimeType(String timeType) {
-        this.timeType = timeType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<TimePeriod> getTimePeriods() {
@@ -47,14 +47,14 @@ public class TimeType implements Serializable {
 
     public TimePeriod addTimePeriod(TimePeriod timePeriod) {
         getTimePeriods().add(timePeriod);
-        timePeriod.setTimeTypeBean(this);
+        timePeriod.setTimeType(this);
 
         return timePeriod;
     }
 
     public TimePeriod removeTimePeriod(TimePeriod timePeriod) {
         getTimePeriods().remove(timePeriod);
-        timePeriod.setTimeTypeBean(null);
+        timePeriod.setTimeType(null);
 
         return timePeriod;
     }

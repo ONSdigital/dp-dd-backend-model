@@ -20,27 +20,27 @@ public class ObservationType implements Serializable {
 
     @Id
     @Column(name = "observation_type")
-    private String observationType;
+    private String id;
 
     private String name;
 
     //bi-directional many-to-one association to DimensionalDataPoint
-    @OneToMany(mappedBy = "observationTypeBean")
+    @OneToMany(mappedBy = "observationType")
     private List<DimensionalDataPoint> dimensionalDataPoints;
 
     public ObservationType() {
     }
 
-    public ObservationType(String observationType) {
-        this.observationType = observationType;
+    public ObservationType(String id) {
+        this.id = id;
     }
 
-    public String getObservationType() {
-        return this.observationType;
+    public String getId() {
+        return this.id;
     }
 
-    public void setObservationType(String observationType) {
-        this.observationType = observationType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -61,14 +61,14 @@ public class ObservationType implements Serializable {
 
     public DimensionalDataPoint addDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
         getDimensionalDataPoints().add(dimensionalDataPoint);
-        dimensionalDataPoint.setObservationTypeBean(this);
+        dimensionalDataPoint.setObservationType(this);
 
         return dimensionalDataPoint;
     }
 
     public DimensionalDataPoint removeDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
         getDimensionalDataPoints().remove(dimensionalDataPoint);
-        dimensionalDataPoint.setObservationTypeBean(null);
+        dimensionalDataPoint.setObservationType(null);
 
         return dimensionalDataPoint;
     }
