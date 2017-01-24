@@ -1,6 +1,9 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the dimension database table.
