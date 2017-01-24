@@ -31,7 +31,7 @@ public class DimensionValue {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "dimension_id")
+    @JoinColumn(name = "dimension_id", updatable = false, insertable = false)
     private Dimension dimension;
 
     @ManyToOne
@@ -41,7 +41,7 @@ public class DimensionValue {
     // bi-directional many-to-one relationship defining the hierarchy. This is the owner side.
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "dimension_id", referencedColumnName = "dimension_id"),
+            @JoinColumn(name = "dimension_id", referencedColumnName = "dimension_id", updatable = false, insertable = false),
             @JoinColumn(name = "parent_code", referencedColumnName = "value_code")})
     private DimensionValue parent;
 
