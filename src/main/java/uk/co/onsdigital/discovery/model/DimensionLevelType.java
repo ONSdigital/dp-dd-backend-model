@@ -6,7 +6,7 @@ import javax.persistence.*;
  * The persistent class for the dimension_level_type database table.
  */
 @Entity
-@Table(name = "dimension", indexes = {@Index(columnList = "type_id")},
+@Table(name = "dimension_level_type", indexes = {@Index(columnList = "type_id")},
         uniqueConstraints=@UniqueConstraint(columnNames={"type_id"})
 )
 public class DimensionLevelType {
