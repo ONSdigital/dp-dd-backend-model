@@ -20,25 +20,25 @@ public class ValueDomain implements Serializable {
 
     @Id
     @Column(name = "value_domain")
-    private String valueDomain;
+    private String id;
 
     //bi-directional many-to-one association to Variable
-    @OneToMany(mappedBy = "valueDomainBean")
+    @OneToMany(mappedBy = "valueDomain")
     private List<Variable> variables;
 
     public ValueDomain() {
     }
 
-    public ValueDomain(String valueDomain) {
-        this.valueDomain = valueDomain;
+    public ValueDomain(String id) {
+        this.id = id;
     }
 
-    public String getValueDomain() {
-        return this.valueDomain;
+    public String getId() {
+        return this.id;
     }
 
-    public void setValueDomain(String valueDomain) {
-        this.valueDomain = valueDomain;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<Variable> getVariables() {
@@ -51,14 +51,14 @@ public class ValueDomain implements Serializable {
 
     public Variable addVariable(Variable variable) {
         getVariables().add(variable);
-        variable.setValueDomainBean(this);
+        variable.setValueDomain(this);
 
         return variable;
     }
 
     public Variable removeVariable(Variable variable) {
         getVariables().remove(variable);
-        variable.setValueDomainBean(null);
+        variable.setValueDomain(null);
 
         return variable;
     }

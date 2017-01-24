@@ -24,10 +24,10 @@ public class ConceptSystem implements Serializable {
 
     @Id
     @Column(name="concept_system", nullable = false)
-    private String conceptSystem;
+    private String id;
 
     //bi-directional many-to-one association to Category
-    @OneToMany(mappedBy="conceptSystemBean")
+    @OneToMany(mappedBy="conceptSystem")
     private List<Category> categories;
 
     //bi-directional many-to-many association to SubjectField
@@ -37,16 +37,16 @@ public class ConceptSystem implements Serializable {
     public ConceptSystem() {
     }
 
-    public ConceptSystem(String conceptSystem) {
-        this.conceptSystem = conceptSystem;
+    public ConceptSystem(String id) {
+        this.id = id;
     }
 
-    public String getConceptSystem() {
-        return this.conceptSystem;
+    public String getId() {
+        return this.id;
     }
 
-    public void setConceptSystem(String conceptSystem) {
-        this.conceptSystem = conceptSystem;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<Category> getCategories() {
@@ -59,14 +59,14 @@ public class ConceptSystem implements Serializable {
 
     public Category addCategory(Category category) {
         getCategories().add(category);
-        category.setConceptSystemBean(this);
+        category.setConceptSystem(this);
 
         return category;
     }
 
     public Category removeCategory(Category category) {
         getCategories().remove(category);
-        category.setConceptSystemBean(null);
+        category.setConceptSystem(null);
 
         return category;
     }
@@ -82,11 +82,11 @@ public class ConceptSystem implements Serializable {
     @Override
     public boolean equals(Object that) {
         return this == that
-                || that instanceof ConceptSystem && Objects.equals(this.conceptSystem, ((ConceptSystem) that).conceptSystem);
+                || that instanceof ConceptSystem && Objects.equals(this.id, ((ConceptSystem) that).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(conceptSystem);
+        return Objects.hash(id);
     }
 }

@@ -32,7 +32,7 @@ public class DimensionalDataSet implements Serializable {
 
     @Id
     @Column(name = "dimensional_data_set_id", columnDefinition = "uuid")
-    private UUID dimensionalDataSetId;
+    private UUID id;
 
     @Column(name = "authentication_role")
     private String authenticationRole;
@@ -111,7 +111,7 @@ public class DimensionalDataSet implements Serializable {
     //bi-directional many-to-one association to DataResource
     @ManyToOne
     @JoinColumn(name = "data_resource")
-    private DataResource dataResourceBean;
+    private DataResource dataResource;
 
     //bi-directional many-to-one association to Presentation
     @OneToMany(mappedBy = "dimensionalDataSet")
@@ -125,17 +125,17 @@ public class DimensionalDataSet implements Serializable {
     public DimensionalDataSet() {
     }
 
-    public DimensionalDataSet(String s3URL, DataResource dataResourceBean) {
+    public DimensionalDataSet(String s3URL, DataResource dataResource) {
         this.s3URL = s3URL;
-        this.dataResourceBean = dataResourceBean;
+        this.dataResource = dataResource;
     }
 
-    public UUID getDimensionalDataSetId() {
-        return this.dimensionalDataSetId;
+    public UUID getId() {
+        return this.id;
     }
 
-    public void setDimensionalDataSetId(UUID dimensionalDataSetId) {
-        this.dimensionalDataSetId = dimensionalDataSetId;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getAuthenticationRole() {
@@ -404,7 +404,7 @@ public class DimensionalDataSet implements Serializable {
             // FIXME: need to populate this during load instead of scanning the entire data point table
             return getDimensionalDataPoints().parallelStream()
                     .unordered()
-                    .map(point -> point.getPopulation().getGeographicArea().getGeographicAreaHierarchyBean())
+                    .map(point -> point.getPopulation().getGeographicArea().getGeographicAreaHierarchy())
                     .distinct();
         }
         return Stream.empty();
@@ -424,12 +424,12 @@ public class DimensionalDataSet implements Serializable {
         return dimensionalDataPoint;
     }
 
-    public DataResource getDataResourceBean() {
-        return this.dataResourceBean;
+    public DataResource getDataResource() {
+        return this.dataResource;
     }
 
-    public void setDataResourceBean(DataResource dataResourceBean) {
-        this.dataResourceBean = dataResourceBean;
+    public void setDataResource(DataResource dataResource) {
+        this.dataResource = dataResource;
     }
 
     public List<Presentation> getPresentations() {
@@ -457,7 +457,7 @@ public class DimensionalDataSet implements Serializable {
     @Override
     public String toString() {
         return "DimensionalDataSet{" +
-                "dimensionalDataSetId=" + dimensionalDataSetId +
+                "dimensionalDataSetId=" + id +
                 ", majorVersion=" + majorVersion +
                 ", minorVersion=" + minorVersion +
                 ", title='" + title + '\'' +

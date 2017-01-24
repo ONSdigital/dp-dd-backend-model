@@ -39,7 +39,7 @@ public class DimensionalDataPoint implements Serializable {
     //bi-directional many-to-one association to ObservationType
     @ManyToOne
     @JoinColumn(name = "observation_type")
-    private ObservationType observationTypeBean;
+    private ObservationType observationType;
 
     //bi-directional many-to-one association to Population
     @ManyToOne
@@ -104,12 +104,12 @@ public class DimensionalDataPoint implements Serializable {
         this.dimensionalDataSet = dimensionalDataSet;
     }
 
-    public ObservationType getObservationTypeBean() {
-        return this.observationTypeBean;
+    public ObservationType getObservationType() {
+        return this.observationType;
     }
 
-    public void setObservationTypeBean(ObservationType observationTypeBean) {
-        this.observationTypeBean = observationTypeBean;
+    public void setObservationType(ObservationType observationType) {
+        this.observationType = observationType;
     }
 
     public Population getPopulation() {

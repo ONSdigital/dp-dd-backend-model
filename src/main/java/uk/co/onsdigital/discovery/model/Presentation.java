@@ -23,7 +23,7 @@ public class Presentation implements Serializable {
     @SequenceGenerator(name = "presseq", sequenceName = "presseq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "presseq")
     @Column(name = "presentation_id")
-    private Long presentationId;
+    private Long id;
 
     private String accessurl;
 
@@ -61,17 +61,17 @@ public class Presentation implements Serializable {
     //bi-directional many-to-one association to PresentationType
     @ManyToOne
     @JoinColumn(name = "presentation_type")
-    private PresentationType presentationTypeBean;
+    private PresentationType presentationType;
 
     public Presentation() {
     }
 
-    public Long getPresentationId() {
-        return this.presentationId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setPresentationId(Long presentationId) {
-        this.presentationId = presentationId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAccessurl() {
@@ -178,12 +178,12 @@ public class Presentation implements Serializable {
         this.dimensionalDataSet = dimensionalDataSet;
     }
 
-    public PresentationType getPresentationTypeBean() {
-        return this.presentationTypeBean;
+    public PresentationType getPresentationType() {
+        return this.presentationType;
     }
 
-    public void setPresentationTypeBean(PresentationType presentationTypeBean) {
-        this.presentationTypeBean = presentationTypeBean;
+    public void setPresentationType(PresentationType presentationType) {
+        this.presentationType = presentationType;
     }
 
 }

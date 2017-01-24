@@ -20,10 +20,10 @@ public class PresentationType implements Serializable {
 
     @Id
     @Column(name = "presentation_type")
-    private String presentationType;
+    private String id;
 
     //bi-directional many-to-one association to Presentation
-    @OneToMany(mappedBy = "presentationTypeBean")
+    @OneToMany(mappedBy = "presentationType")
     private List<Presentation> presentations;
 
     public PresentationType() {
@@ -31,15 +31,15 @@ public class PresentationType implements Serializable {
 
     public PresentationType(String presentationType) {
         super();
-        this.setPresentationType(presentationType);
+        this.setId(presentationType);
     }
 
-    public String getPresentationType() {
-        return this.presentationType;
+    public String getId() {
+        return this.id;
     }
 
-    public void setPresentationType(String presentationType) {
-        this.presentationType = presentationType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<Presentation> getPresentations() {
@@ -52,14 +52,14 @@ public class PresentationType implements Serializable {
 
     public Presentation addPresentation(Presentation presentation) {
         getPresentations().add(presentation);
-        presentation.setPresentationTypeBean(this);
+        presentation.setPresentationType(this);
 
         return presentation;
     }
 
     public Presentation removePresentation(Presentation presentation) {
         getPresentations().remove(presentation);
-        presentation.setPresentationTypeBean(null);
+        presentation.setPresentationType(null);
 
         return presentation;
     }

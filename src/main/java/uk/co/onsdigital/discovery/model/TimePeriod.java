@@ -31,7 +31,7 @@ public class TimePeriod implements Serializable {
     @SequenceGenerator(name = "timeseq", sequenceName = "timeseq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timeseq")
     @Column(name = "time_period_id")
-    private Long timePeriodId;
+    private Long id;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "end_date")
@@ -50,17 +50,17 @@ public class TimePeriod implements Serializable {
     //bi-directional many-to-one association to TimeType
     @ManyToOne
     @JoinColumn(name = "time_type")
-    private TimeType timeTypeBean;
+    private TimeType timeType;
 
     public TimePeriod() {
     }
 
-    public Long getTimePeriodId() {
-        return this.timePeriodId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setTimePeriodId(Long timePeriodId) {
-        this.timePeriodId = timePeriodId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getEndDate() {
@@ -109,12 +109,12 @@ public class TimePeriod implements Serializable {
         return population;
     }
 
-    public TimeType getTimeTypeBean() {
-        return this.timeTypeBean;
+    public TimeType getTimeType() {
+        return this.timeType;
     }
 
-    public void setTimeTypeBean(TimeType timeTypeBean) {
-        this.timeTypeBean = timeTypeBean;
+    public void setTimeType(TimeType timeType) {
+        this.timeType = timeType;
     }
 
 }

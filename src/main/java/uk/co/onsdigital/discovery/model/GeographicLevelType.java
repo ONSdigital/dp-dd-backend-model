@@ -20,23 +20,23 @@ public class GeographicLevelType implements Serializable {
 
     @Id
     @Column(name = "geographic_level_type")
-    private String geographicLevelType;
+    private String id;
 
     private String metadata;
 
     //bi-directional many-to-one association to GeographicArea
-    @OneToMany(mappedBy = "geographicLevelTypeBean")
+    @OneToMany(mappedBy = "geographicLevelType")
     private List<GeographicArea> geographicAreas;
 
     public GeographicLevelType() {
     }
 
-    public String getGeographicLevelType() {
-        return this.geographicLevelType;
+    public String getId() {
+        return this.id;
     }
 
-    public void setGeographicLevelType(String geographicLevelType) {
-        this.geographicLevelType = geographicLevelType;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMetadata() {
@@ -57,14 +57,14 @@ public class GeographicLevelType implements Serializable {
 
     public GeographicArea addGeographicArea(GeographicArea geographicArea) {
         getGeographicAreas().add(geographicArea);
-        geographicArea.setGeographicLevelTypeBean(this);
+        geographicArea.setGeographicLevelType(this);
 
         return geographicArea;
     }
 
     public GeographicArea removeGeographicArea(GeographicArea geographicArea) {
         getGeographicAreas().remove(geographicArea);
-        geographicArea.setGeographicLevelTypeBean(null);
+        geographicArea.setGeographicLevelType(null);
 
         return geographicArea;
     }

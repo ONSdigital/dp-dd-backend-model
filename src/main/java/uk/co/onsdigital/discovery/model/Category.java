@@ -30,7 +30,7 @@ public class Category implements Serializable {
     @SequenceGenerator(name = "catseq", sequenceName = "catseq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "catseq")
     @Column(name = "category_id")
-    private Long categoryId;
+    private Long id;
 
     private String name;
 
@@ -46,7 +46,7 @@ public class Category implements Serializable {
     //bi-directional many-to-one association to ConceptSystem
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "concept_system")
-    private ConceptSystem conceptSystemBean;
+    private ConceptSystem conceptSystem;
 
     //bi-directional many-to-many association to Variable
     @ManyToMany(mappedBy = "categories")
@@ -59,12 +59,12 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Long getCategoryId() {
-        return this.categoryId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -105,12 +105,12 @@ public class Category implements Serializable {
         return category;
     }
 
-    public ConceptSystem getConceptSystemBean() {
-        return this.conceptSystemBean;
+    public ConceptSystem getConceptSystem() {
+        return this.conceptSystem;
     }
 
-    public void setConceptSystemBean(ConceptSystem conceptSystemBean) {
-        this.conceptSystemBean = conceptSystemBean;
+    public void setConceptSystem(ConceptSystem conceptSystem) {
+        this.conceptSystem = conceptSystem;
     }
 
     public List<Variable> getVariables() {

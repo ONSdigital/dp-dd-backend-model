@@ -24,14 +24,14 @@ import java.util.List;
 public class DataResource implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public DataResource(String dataResource, String title) {
-        this.dataResource = dataResource;
+    public DataResource(String id, String title) {
+        this.id = id;
         this.title = title;
     }
 
     @Id
     @Column(name = "data_resource")
-    private String dataResource;
+    private String id;
 
     @Column(name = "column_concept")
     private String columnConcept;
@@ -54,22 +54,21 @@ public class DataResource implements Serializable {
             @JoinColumn(name = "taxonomy")
     }
     )
-    private List<Taxonomy> taxonomies;
 
     //bi-directional many-to-one association to DimensionalDataSet
-    @OneToMany(mappedBy = "dataResourceBean", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "dataResource", cascade = CascadeType.PERSIST)
     @OrderBy("majorVersion DESC, minorVersion DESC")
     private List<DimensionalDataSet> dimensionalDataSets;
 
     public DataResource() {
     }
 
-    public String getDataResource() {
-        return this.dataResource;
+    public String getId() {
+        return this.id;
     }
 
     public void setDataResource(String dataResource) {
-        this.dataResource = dataResource;
+        this.id = id;
     }
 
     public String getColumnConcept() {
@@ -104,14 +103,6 @@ public class DataResource implements Serializable {
         this.title = title;
     }
 
-    public List<Taxonomy> getTaxonomies() {
-        return this.taxonomies;
-    }
-
-    public void setTaxonomies(List<Taxonomy> taxonomies) {
-        this.taxonomies = taxonomies;
-    }
-
     public List<DimensionalDataSet> getDimensionalDataSets() {
         return this.dimensionalDataSets;
     }
@@ -122,14 +113,14 @@ public class DataResource implements Serializable {
 
     public DimensionalDataSet addDimensionalDataSet(DimensionalDataSet dimensionalDataSet) {
         getDimensionalDataSets().add(dimensionalDataSet);
-        dimensionalDataSet.setDataResourceBean(this);
+        dimensionalDataSet.setDataResource(this);
 
         return dimensionalDataSet;
     }
 
     public DimensionalDataSet removeDimensionalDataSet(DimensionalDataSet dimensionalDataSet) {
         getDimensionalDataSets().remove(dimensionalDataSet);
-        dimensionalDataSet.setDataResourceBean(null);
+        dimensionalDataSet.setDataResource(null);
 
         return dimensionalDataSet;
     }
@@ -137,10 +128,9 @@ public class DataResource implements Serializable {
     @Override
     public String toString() {
         return "DataResource{" +
-                "dataResource='" + dataResource + '\'' +
+                "dataResource='" + id + '\'' +
                 ", metadata=" + metadata +
                 ", title='" + title + '\'' +
-                ", taxonomies=" + taxonomies +
                 '}';
     }
 }

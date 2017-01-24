@@ -20,7 +20,7 @@ public class GeographicArea implements Serializable {
     @SequenceGenerator(name = "areaseq", sequenceName = "areaseq", allocationSize = 1, initialValue = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "areaseq")
     @Column(name = "geographic_area_id")
-    private Long geographicAreaId;
+    private Long id;
 
     @Column(name = "ext_code")
     private String extCode;
@@ -41,17 +41,17 @@ public class GeographicArea implements Serializable {
     //bi-directional many-to-one association to GeographicAreaHierarchy
     @ManyToOne
     @JoinColumn(name = "geographic_area_hierarchy")
-    private GeographicAreaHierarchy geographicAreaHierarchyBean;
+    private GeographicAreaHierarchy geographicAreaHierarchy;
 
     //bi-directional many-to-one association to GeographicAreaType
     @ManyToOne
     @JoinColumn(name = "geographic_area_type")
-    private GeographicAreaType geographicAreaTypeBean;
+    private GeographicAreaType geographicAreaType;
 
     //bi-directional many-to-one association to GeographicLevelType
     @ManyToOne
     @JoinColumn(name = "geographic_level_type")
-    private GeographicLevelType geographicLevelTypeBean;
+    private GeographicLevelType geographicLevelType;
 
     //bi-directional many-to-one association to Population
     @OneToMany(mappedBy = "geographicArea")
@@ -60,12 +60,12 @@ public class GeographicArea implements Serializable {
     public GeographicArea() {
     }
 
-    public Long getGeographicAreaId() {
-        return this.geographicAreaId;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setGeographicAreaId(Long geographicAreaId) {
-        this.geographicAreaId = geographicAreaId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getExtCode() {
@@ -122,28 +122,28 @@ public class GeographicArea implements Serializable {
         return geographicArea;
     }
 
-    public GeographicAreaHierarchy getGeographicAreaHierarchyBean() {
-        return this.geographicAreaHierarchyBean;
+    public GeographicAreaHierarchy getGeographicAreaHierarchy() {
+        return this.geographicAreaHierarchy;
     }
 
-    public void setGeographicAreaHierarchyBean(GeographicAreaHierarchy geographicAreaHierarchyBean) {
-        this.geographicAreaHierarchyBean = geographicAreaHierarchyBean;
+    public void setGeographicAreaHierarchy(GeographicAreaHierarchy geographicAreaHierarchy) {
+        this.geographicAreaHierarchy = geographicAreaHierarchy;
     }
 
-    public GeographicAreaType getGeographicAreaTypeBean() {
-        return this.geographicAreaTypeBean;
+    public GeographicAreaType getGeographicAreaType() {
+        return this.geographicAreaType;
     }
 
-    public void setGeographicAreaTypeBean(GeographicAreaType geographicAreaTypeBean) {
-        this.geographicAreaTypeBean = geographicAreaTypeBean;
+    public void setGeographicAreaType(GeographicAreaType geographicAreaType) {
+        this.geographicAreaType = geographicAreaType;
     }
 
-    public GeographicLevelType getGeographicLevelTypeBean() {
-        return this.geographicLevelTypeBean;
+    public GeographicLevelType getGeographicLevelType() {
+        return this.geographicLevelType;
     }
 
-    public void setGeographicLevelTypeBean(GeographicLevelType geographicLevelTypeBean) {
-        this.geographicLevelTypeBean = geographicLevelTypeBean;
+    public void setGeographicLevelType(GeographicLevelType geographicLevelType) {
+        this.geographicLevelType = geographicLevelType;
     }
 
     public List<Population> getPopulations() {

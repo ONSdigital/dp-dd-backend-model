@@ -21,21 +21,21 @@ public class GeographicAreaHierarchy implements Serializable {
 
     @Id
     @Column(name = "geographic_area_hierarchy")
-    private String geographicAreaHierarchy;
+    private String id;
 
     //bi-directional many-to-one association to GeographicArea
-    @OneToMany(mappedBy = "geographicAreaHierarchyBean")
+    @OneToMany(mappedBy = "geographicAreaHierarchy")
     private List<GeographicArea> geographicAreas;
 
     public GeographicAreaHierarchy() {
     }
 
-    public String getGeographicAreaHierarchy() {
-        return this.geographicAreaHierarchy;
+    public String getId() {
+        return this.id;
     }
 
-    public void setGeographicAreaHierarchy(String geographicAreaHierarchy) {
-        this.geographicAreaHierarchy = geographicAreaHierarchy;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<GeographicArea> getGeographicAreas() {
@@ -48,14 +48,14 @@ public class GeographicAreaHierarchy implements Serializable {
 
     public GeographicArea addGeographicArea(GeographicArea geographicArea) {
         getGeographicAreas().add(geographicArea);
-        geographicArea.setGeographicAreaHierarchyBean(this);
+        geographicArea.setGeographicAreaHierarchy(this);
 
         return geographicArea;
     }
 
     public GeographicArea removeGeographicArea(GeographicArea geographicArea) {
         getGeographicAreas().remove(geographicArea);
-        geographicArea.setGeographicAreaHierarchyBean(null);
+        geographicArea.setGeographicAreaHierarchy(null);
 
         return geographicArea;
     }
