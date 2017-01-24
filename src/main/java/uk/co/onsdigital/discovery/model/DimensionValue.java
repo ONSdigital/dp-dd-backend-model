@@ -8,8 +8,8 @@ import java.util.List;
  * The persistent class for the dimension_level_type database table.
  */
 @Entity
-@Table(name = "dimension_value", indexes = {@Index(columnList = "id")},
-        uniqueConstraints=@UniqueConstraint(columnNames={"id"})
+@Table(name = "dimension_value", indexes = {@Index(columnList = "dimension_id,value_code")},
+        uniqueConstraints=@UniqueConstraint(columnNames={"dimension_id", "value_code"})
 )
 @IdClass(DimensionValue.DimensionValueId.class)
 public class DimensionValue {
@@ -48,6 +48,62 @@ public class DimensionValue {
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.
     @OneToMany(mappedBy = "parent")
     private List<DimensionValue> children;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Integer getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(Integer displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+
+    public DimensionLevelType getLevelType() {
+        return levelType;
+    }
+
+    public void setLevelType(DimensionLevelType levelType) {
+        this.levelType = levelType;
+    }
+
+    public DimensionValue getParent() {
+        return parent;
+    }
+
+    public void setParent(DimensionValue parent) {
+        this.parent = parent;
+    }
+
+    public List<DimensionValue> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<DimensionValue> children) {
+        this.children = children;
+    }
 
     /**
      * The id fields of a DimensionValue.
