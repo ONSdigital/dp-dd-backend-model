@@ -27,7 +27,7 @@ public class DimensionValue {
     @Column(name = "display_order")
     private Integer displayOrder;
 
-    @Column(name = "name")
+    @Column(name = "value_name")
     private String name;
 
     @ManyToOne

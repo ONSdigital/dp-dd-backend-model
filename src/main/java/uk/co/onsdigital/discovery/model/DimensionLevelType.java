@@ -6,21 +6,21 @@ import javax.persistence.*;
  * The persistent class for the dimension_level_type database table.
  */
 @Entity
-@Table(name = "dimension", indexes = {@Index(columnList = "id")},
-        uniqueConstraints=@UniqueConstraint(columnNames={"id"})
+@Table(name = "dimension", indexes = {@Index(columnList = "type_id")},
+        uniqueConstraints=@UniqueConstraint(columnNames={"type_id"})
 )
 public class DimensionLevelType {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "type_id")
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "type_name")
     private String name;
 
-    @Column(name = "level")
+    @Column(name = "type_level")
     private Integer level;
 
     public String getId() {
