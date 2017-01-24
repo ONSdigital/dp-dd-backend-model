@@ -40,7 +40,9 @@ public class DimensionValue {
 
     // bi-directional many-to-one relationship defining the hierarchy. This is the owner side.
     @ManyToOne
-    @JoinColumns({@JoinColumn(name = "dimension_id"), @JoinColumn(name = "parent_code")})
+    @JoinColumns({
+            @JoinColumn(name = "dimension_id", referencedColumnName = "dimension_id"),
+            @JoinColumn(name = "parent_code", referencedColumnName = "value_code")})
     private DimensionValue parent;
 
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.
