@@ -8,9 +8,7 @@ import java.util.List;
  * The persistent class for the dimension_level_type database table.
  */
 @Entity
-@Table(name = "dimension_value", indexes = {@Index(columnList = "dimension_id,value_code")},
-        uniqueConstraints=@UniqueConstraint(columnNames={"dimension_id", "value_code"})
-)
+@Table(name = "dimension_value", uniqueConstraints=@UniqueConstraint(columnNames={"dimension_id", "value_code"}))
 @IdClass(DimensionValue.DimensionValueId.class)
 public class DimensionValue {
 
