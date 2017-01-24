@@ -22,19 +22,19 @@ public class DimensionValue {
     @Column(name = "value_code")
     private String code;
 
-    @Column(name = "display_order")
-    private Integer displayOrder;
-
     @Column(name = "value_name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "dimension_id", updatable = false, insertable = false)
-    private Dimension dimension;
+    @Column(name = "display_order")
+    private Integer displayOrder;
 
     @ManyToOne
     @JoinColumn(name = "level_type")
     private DimensionLevelType levelType;
+
+    @ManyToOne
+    @JoinColumn(name = "dimension_id", updatable = false, insertable = false)
+    private Dimension dimension;
 
     // bi-directional many-to-one relationship defining the hierarchy. This is the owner side.
     @ManyToOne
