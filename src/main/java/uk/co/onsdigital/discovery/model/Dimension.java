@@ -6,9 +6,7 @@ import javax.persistence.*;
  * The persistent class for the dimension database table.
  */
 @Entity
-@Table(name = "dimension", indexes = {@Index(columnList = "dimension_id")},
-        uniqueConstraints=@UniqueConstraint(columnNames={"dimension_id"})
-)
+@Table(name = "dimension")
 public class Dimension {
 
     private static final long serialVersionUID = 1L;
