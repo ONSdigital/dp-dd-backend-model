@@ -2,7 +2,6 @@ package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,8 +36,7 @@ public class DataResource implements Serializable {
     @Column(name = "column_concept")
     private String columnConcept;
 
-    @Embedded
-    private Metadata metadata = new Metadata();
+    private String metadata;
 
     @Column(name = "row_concept")
     private String rowConcept;
@@ -81,11 +79,11 @@ public class DataResource implements Serializable {
         this.columnConcept = columnConcept;
     }
 
-    public Metadata getMetadata() {
+    public String getMetadata() {
         return this.metadata;
     }
 
-    public void setMetadata(Metadata metadata) {
+    public void setMetadata(String metadata) {
         this.metadata = metadata;
     }
 

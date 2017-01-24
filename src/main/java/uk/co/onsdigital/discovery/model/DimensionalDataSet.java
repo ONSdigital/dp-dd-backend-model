@@ -1,7 +1,6 @@
 package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -60,8 +59,7 @@ public class DimensionalDataSet implements Serializable {
     @Column(name = "load_exception")
     private String loadException;
 
-    @Embedded
-    private Metadata metadata = new Metadata();
+    private String metadata;
 
     @Column(name = "major_version", nullable = false)
     private int majorVersion;
@@ -228,11 +226,11 @@ public class DimensionalDataSet implements Serializable {
         this.loadException = loadException;
     }
 
-    public Metadata getMetadata() {
+    public String getMetadata() {
         return this.metadata;
     }
 
-    public void setMetadata(Metadata metadata) {
+    public void setMetadata(String metadata) {
         this.metadata = metadata;
     }
 
