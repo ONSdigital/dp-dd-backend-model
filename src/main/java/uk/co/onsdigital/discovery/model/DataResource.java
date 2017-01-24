@@ -4,9 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -42,18 +39,6 @@ public class DataResource implements Serializable {
     private String rowConcept;
 
     private String title;
-
-    //bi-directional many-to-many association to Taxonomy
-    @ManyToMany
-    @JoinTable(
-            name = "data_resource_taxonomy"
-            , joinColumns = {
-            @JoinColumn(name = "data_resource")
-    }
-            , inverseJoinColumns = {
-            @JoinColumn(name = "taxonomy")
-    }
-    )
 
     //bi-directional many-to-one association to DimensionalDataSet
     @OneToMany(mappedBy = "dataResource", cascade = CascadeType.PERSIST)
