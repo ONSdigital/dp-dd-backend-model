@@ -11,7 +11,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "dimensional_data_set_row_index")
 @NamedQueries({
-        @NamedQuery(name = "DimensionalDataSetRowIndex.countForDataset", query = "SELECT COUNT(r) FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId")
+        @NamedQuery(name = "DimensionalDataSetRowIndex.countForDataset", query = "SELECT COUNT(r) FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId"),
+        @NamedQuery(name = "DimensionalDataSetRowIndex.deleteForDataset", query = "DELETE FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId")
 })
 public class DimensionalDataSetRowIndex {
     @Id
