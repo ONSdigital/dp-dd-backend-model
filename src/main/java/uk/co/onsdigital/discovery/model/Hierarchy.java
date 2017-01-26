@@ -6,22 +6,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the dimension database table.
+ * The persistent class for the hierarchy database table.
  */
 @Entity
-@Table(name = "dimension")
-public class Dimension {
+@Table(name = "hierarchy")
+public class Hierarchy {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "dimension_id")
+    @Column(name = "hierarchy_id")
     private String id;
 
-    @Column(name = "dimension_name")
+    @Column(name = "hierarchy_name")
     private String name;
 
-    @Column(name = "dimension_type")
+    @Column(name = "hierarchy_type")
     private String type;
 
     public String getId() {

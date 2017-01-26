@@ -14,18 +14,18 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * The persistent class for the dimension_level_type database table.
+ * The persistent class for the hierarchy_entry database table.
  */
 @Entity
-@Table(name = "dimension_value", uniqueConstraints=@UniqueConstraint(columnNames={"dimension_id", "value_code"}))
-@IdClass(DimensionValue.DimensionValueId.class)
-public class DimensionValue {
+@Table(name = "hierarchy_entry", uniqueConstraints=@UniqueConstraint(columnNames={"hierarchy_id", "value_code"}))
+@IdClass(HierarchyEntry.HierarchyEntryId.class)
+public class HierarchyEntry {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "dimension_id")
-    private String dimensionId;
+    @Column(name = "hierarchy_id")
+    private String hierarchyId;
 
     @Id
     @Column(name = "value_code")
@@ -39,22 +39,22 @@ public class DimensionValue {
 
     @ManyToOne
     @JoinColumn(name = "level_type")
-    private DimensionLevelType levelType;
+    private HierarchyLevelType levelType;
 
     @ManyToOne
-    @JoinColumn(name = "dimension_id", updatable = false, insertable = false)
-    private Dimension dimension;
+    @JoinColumn(name = "hierarchy_id", updatable = false, insertable = false)
+    private Hierarchy hierarchy;
 
     // bi-directional many-to-one relationship defining the hierarchy. This is the owner side.
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "dimension_id", referencedColumnName = "dimension_id", updatable = false, insertable = false),
+            @JoinColumn(name = "hierarchy_id", referencedColumnName = "hierarchy_id", updatable = false, insertable = false),
             @JoinColumn(name = "parent_code", referencedColumnName = "value_code")})
-    private DimensionValue parent;
+    private HierarchyEntry parent;
 
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.
     @OneToMany(mappedBy = "parent")
-    private List<DimensionValue> children;
+    private List<HierarchyEntry> children;
 
     public String getCode() {
         return code;
@@ -80,51 +80,51 @@ public class DimensionValue {
         this.name = name;
     }
 
-    public Dimension getDimension() {
-        return dimension;
+    public Hierarchy getHierarchy() {
+        return hierarchy;
     }
 
-    public void setDimension(Dimension dimension) {
-        this.dimension = dimension;
+    public void setHierarchy(Hierarchy hierarchy) {
+        this.hierarchy = hierarchy;
     }
 
-    public DimensionLevelType getLevelType() {
+    public HierarchyLevelType getLevelType() {
         return levelType;
     }
 
-    public void setLevelType(DimensionLevelType levelType) {
+    public void setLevelType(HierarchyLevelType levelType) {
         this.levelType = levelType;
     }
 
-    public DimensionValue getParent() {
+    public HierarchyEntry getParent() {
         return parent;
     }
 
-    public void setParent(DimensionValue parent) {
+    public void setParent(HierarchyEntry parent) {
         this.parent = parent;
     }
 
-    public List<DimensionValue> getChildren() {
+    public List<HierarchyEntry> getChildren() {
         return children;
     }
 
-    public void setChildren(List<DimensionValue> children) {
+    public void setChildren(List<HierarchyEntry> children) {
         this.children = children;
     }
 
     /**
-     * The id fields of a DimensionValue.
+     * The id fields of a HierarchyEntry.
      */
-    static class DimensionValueId implements Serializable {
-        private String dimensionId;
+    static class HierarchyEntryId implements Serializable {
+        private String hierarchyId;
         private String code;
 
-        public String getDimensionId() {
-            return dimensionId;
+        public String getHierarchyId() {
+            return hierarchyId;
         }
 
-        public void setDimensionId(String dimensionId) {
-            this.dimensionId = dimensionId;
+        public void setHierarchyId(String hierarchyId) {
+            this.hierarchyId = hierarchyId;
         }
 
         public String getCode() {

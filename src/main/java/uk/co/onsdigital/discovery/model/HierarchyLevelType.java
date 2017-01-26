@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * The persistent class for the dimension_level_type database table.
+ * The persistent class for the hierarchy_level_type database table.
  */
 @Entity
-@Table(name = "dimension_level_type")
-public class DimensionLevelType {
+@Table(name = "hierarchy_level_type")
+public class HierarchyLevelType {
 
     private static final long serialVersionUID = 1L;
 
