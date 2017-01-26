@@ -119,11 +119,11 @@ public class HierarchyEntry {
         private String hierarchyId;
         private String code;
 
-        public String getDimensionId() {
+        public String getHierarchyId() {
             return hierarchyId;
         }
 
-        public void setDimensionId(String hierarchyId) {
+        public void setHierarchyId(String hierarchyId) {
             this.hierarchyId = hierarchyId;
         }
 
