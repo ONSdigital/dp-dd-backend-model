@@ -3,6 +3,7 @@ package uk.co.onsdigital.discovery.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -18,6 +19,7 @@ import static uk.co.onsdigital.discovery.model.DimensionalDataSetRowIndex.DELETE
         @NamedQuery(name = COUNT_QUERY, query = "SELECT COUNT(r) FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId"),
         @NamedQuery(name = DELETE_QUERY, query = "DELETE FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId")
 })
+@IdClass(DimensionalDataSetRowIndex.RowIndexId.class)
 public class DimensionalDataSetRowIndex implements Serializable {
     //default serial version id, required for serializable classes.
     private static final long serialVersionUID = 1L;
@@ -52,5 +54,26 @@ public class DimensionalDataSetRowIndex implements Serializable {
 
     public void setRowIndex(Long rowIndex) {
         this.rowIndex = rowIndex;
+    }
+
+    static class RowIndexId  implements Serializable {
+        private UUID datasetId;
+        private Long rowIndex;
+
+        public UUID getDatasetId() {
+            return datasetId;
+        }
+
+        public void setDatasetId(UUID datasetId) {
+            this.datasetId = datasetId;
+        }
+
+        public Long getRowIndex() {
+            return rowIndex;
+        }
+
+        public void setRowIndex(Long rowIndex) {
+            this.rowIndex = rowIndex;
+        }
     }
 }
