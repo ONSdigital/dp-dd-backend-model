@@ -125,9 +125,6 @@ public class DimensionalDataSet implements Serializable {
     @Column(name = "total_row_count")
     private Long totalRowCount;
 
-    @Column(name = "is_complete")
-    private boolean complete;
-
     public DimensionalDataSet() {
     }
 
@@ -390,14 +387,6 @@ public class DimensionalDataSet implements Serializable {
 
     public void setTotalRowCount(Long totalRowCount) {
         this.totalRowCount = totalRowCount;
-    }
-
-    public boolean isComplete() {
-        return complete;
-    }
-
-    public void setComplete(boolean complete) {
-        this.complete = complete;
     }
 
     /**
