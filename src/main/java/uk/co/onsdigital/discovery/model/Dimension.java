@@ -25,8 +25,8 @@ public class Dimension {
 
     @ManyToOne
     @JoinColumns ({
-        @JoinColumn(name = "hierarchy_entry_hierarchy_id", referencedColumnName="hierarchy_id", updatable = false, insertable = false),
-        @JoinColumn(name = "hierarchy_entry_value_code", referencedColumnName="value_code", updatable = false, insertable = false)
+        @JoinColumn(name = "hierarchy_entry_hierarchy_id", referencedColumnName="hierarchy_id"),
+        @JoinColumn(name = "hierarchy_entry_value_code", referencedColumnName="value_code")
     })
     private HierarchyEntry hierarchyEntry;
 
@@ -71,10 +71,19 @@ public class Dimension {
         this.value = value;
     }
 
-    static class DimensionId implements Serializable {
+    public static class DimensionId implements Serializable {
         private UUID dimensionalDataSetId;
         private String name;
         private String value;
+
+        public DimensionId() {
+        }
+
+        public DimensionId(UUID dimensionalDataSetId, String name, String value) {
+            this.dimensionalDataSetId = dimensionalDataSetId;
+            this.name = name;
+            this.value = value;
+        }
 
         public UUID getDimensionalDataSetId() {
             return dimensionalDataSetId;
