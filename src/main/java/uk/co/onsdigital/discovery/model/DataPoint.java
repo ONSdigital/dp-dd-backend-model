@@ -12,7 +12,13 @@ public class DataPoint {
     @Id
     private UUID id;
 
-    private int observation;
+    private float observation;
+
+    @Column(name = "observation_type_value")
+    private float observationTypeValue;
+
+    @Column(name = "data_marking")
+    private String dataMarking;
 
     @ManyToMany
     @JoinTable(
@@ -37,12 +43,28 @@ public class DataPoint {
         this.id = id;
     }
 
-    public int getObservation() {
+    public float getObservation() {
         return observation;
     }
 
-    public void setObservation(int observation) {
+    public void setObservation(float observation) {
         this.observation = observation;
+    }
+
+    public float getObservationTypeValue() {
+        return observationTypeValue;
+    }
+
+    public void setObservationTypeValue(float observationTypeValue) {
+        this.observationTypeValue = observationTypeValue;
+    }
+
+    public String getDataMarking() {
+        return dataMarking;
+    }
+
+    public void setDataMarking(String dataMarking) {
+        this.dataMarking = dataMarking;
     }
 
     public List<Dimension> getDimensions() {
@@ -52,4 +74,6 @@ public class DataPoint {
     public void setDimensions(List<Dimension> dimensions) {
         this.dimensions = dimensions;
     }
+
+
 }
