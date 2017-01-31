@@ -30,6 +30,11 @@ import java.util.stream.Stream;
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    // The status of a dataset when created, until all rows have been ingested
+    public static final String STATUS_NEW = "new";
+    // The status of a dataset once all rows have been ingested.
+    public static final String STATUS_COMPLETE = "complete";
+
     @Id
     @Column(name = "dimensional_data_set_id", columnDefinition = "uuid")
     private UUID id;
