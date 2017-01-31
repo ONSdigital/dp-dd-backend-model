@@ -32,7 +32,7 @@ public class DataPoint {
             @JoinColumn(name = "dimension_value", referencedColumnName = "value")
     }
     )
-    private List<Dimension> dimensions;
+    private List<DimensionValue> dimensionValues;
 
 
     public UUID getId() {
@@ -67,12 +67,12 @@ public class DataPoint {
         this.dataMarking = dataMarking;
     }
 
-    public List<Dimension> getDimensions() {
-        return dimensions;
+    public List<DimensionValue> getDimensionValues() {
+        return dimensionValues;
     }
 
-    public void setDimensions(List<Dimension> dimensions) {
-        this.dimensions = dimensions;
+    public void setDimensionValues(List<DimensionValue> dimensionValues) {
+        this.dimensionValues = dimensionValues;
     }
 
 

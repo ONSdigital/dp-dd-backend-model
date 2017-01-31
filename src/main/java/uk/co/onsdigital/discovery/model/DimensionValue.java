@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Table(name = "dimension", uniqueConstraints = @UniqueConstraint(columnNames={"dimensional_data_set_id", "name", "value"}))
-@IdClass(Dimension.DimensionId.class)
-public class Dimension {
+@Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimensional_data_set_id", "name", "value"}))
+@IdClass(DimensionValue.DimensionId.class)
+public class DimensionValue {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,14 +26,14 @@ public class Dimension {
     @ManyToOne
     @JoinColumns ({
         @JoinColumn(name = "hierarchy_entry_hierarchy_id", referencedColumnName="hierarchy_id"),
-        @JoinColumn(name = "hierarchy_entry_value_code", referencedColumnName="value_code")
+        @JoinColumn(name = "hierarchy_entry_code", referencedColumnName="code")
     })
     private HierarchyEntry hierarchyEntry;
 
-    public Dimension() {
+    public DimensionValue() {
     }
 
-    public Dimension(UUID dimensionalDataSetId, String name, String value) {
+    public DimensionValue(UUID dimensionalDataSetId, String name, String value) {
         this.dimensionalDataSetId = dimensionalDataSetId;
         this.name = name;
         this.value = value;

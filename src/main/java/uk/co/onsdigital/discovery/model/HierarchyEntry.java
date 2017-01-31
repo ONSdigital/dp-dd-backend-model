@@ -17,7 +17,7 @@ import java.util.List;
  * The persistent class for the hierarchy_entry database table.
  */
 @Entity
-@Table(name = "hierarchy_entry", uniqueConstraints=@UniqueConstraint(columnNames={"hierarchy_id", "value_code"}))
+@Table(name = "hierarchy_entry", uniqueConstraints=@UniqueConstraint(columnNames={"hierarchy_id", "code"}))
 @IdClass(HierarchyEntry.HierarchyEntryId.class)
 public class HierarchyEntry {
 
@@ -28,28 +28,28 @@ public class HierarchyEntry {
     private String hierarchyId;
 
     @Id
-    @Column(name = "value_code")
+    @Column(name = "code")
     private String code;
 
-    @Column(name = "value_name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "display_order")
     private Integer displayOrder;
 
     @ManyToOne
-    @JoinColumn(name = "level_type")
+    @JoinColumn(name = "hierarchy_level_type_id")
     private HierarchyLevelType levelType;
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_id", updatable = false, insertable = false)
     private Hierarchy hierarchy;
 
-    // bi-directional many-to-one relationship defining the hierarchy. This is the owner side.
+    // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name = "hierarchy_id", referencedColumnName = "hierarchy_id", updatable = false, insertable = false),
-            @JoinColumn(name = "parent_code", referencedColumnName = "value_code")})
+            @JoinColumn(name = "parent_code", referencedColumnName = "code")})
     private HierarchyEntry parent;
 
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.

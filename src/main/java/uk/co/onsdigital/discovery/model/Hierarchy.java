@@ -15,13 +15,13 @@ public class Hierarchy {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "hierarchy_id")
+    @Column(name = "id")
     private String id;
 
-    @Column(name = "hierarchy_name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "hierarchy_type")
+    @Column(name = "type")
     private String type;
 
     public String getId() {
