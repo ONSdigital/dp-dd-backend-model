@@ -12,26 +12,22 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The persistent class for the hierarchy_entry database table.
  */
 @Entity
-@Table(name = "hierarchy_entry", uniqueConstraints=@UniqueConstraint(columnNames={"hierarchy_id", "code"}))
-@IdClass(HierarchyEntry.HierarchyEntryId.class)
+@Table(name = "hierarchy_entry", uniqueConstraints = @UniqueConstraint(columnNames={"hierarchy_id", "code"}))
 public class HierarchyEntry {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "hierarchy_id")
-    private String hierarchyId;
+    private UUID id;
 
-    @Id
-    @Column(name = "code")
     private String code;
 
-    @Column(name = "name")
     private String name;
 
     @Column(name = "display_order")
@@ -42,14 +38,12 @@ public class HierarchyEntry {
     private HierarchyLevelType levelType;
 
     @ManyToOne
-    @JoinColumn(name = "hierarchy_id", updatable = false, insertable = false)
+    @JoinColumn(name = "hierarchy_id", nullable = false)
     private Hierarchy hierarchy;
 
     // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "hierarchy_id", referencedColumnName = "hierarchy_id", updatable = false, insertable = false),
-            @JoinColumn(name = "parent_code", referencedColumnName = "code")})
+    @JoinColumn(name = "parent", referencedColumnName = "id")
     private HierarchyEntry parent;
 
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.
@@ -112,27 +106,4 @@ public class HierarchyEntry {
         this.children = children;
     }
 
-    /**
-     * The id fields of a HierarchyEntry.
-     */
-    static class HierarchyEntryId implements Serializable {
-        private String hierarchyId;
-        private String code;
-
-        public String getHierarchyId() {
-            return hierarchyId;
-        }
-
-        public void setHierarchyId(String hierarchyId) {
-            this.hierarchyId = hierarchyId;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-    }
 }
