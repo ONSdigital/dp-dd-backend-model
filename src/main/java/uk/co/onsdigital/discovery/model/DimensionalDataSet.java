@@ -30,6 +30,11 @@ import java.util.stream.Stream;
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    // The status of a dataset when created, until all rows have been ingested
+    public static final String STATUS_NEW = "new";
+    // The status of a dataset once all rows have been ingested.
+    public static final String STATUS_COMPLETE = "complete";
+
     @Id
     @Column(name = "dimensional_data_set_id", columnDefinition = "uuid")
     private UUID id;
@@ -121,6 +126,9 @@ public class DimensionalDataSet implements Serializable {
     @JoinTable(name = "dimensional_data_set_concept_system", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
             inverseJoinColumns = @JoinColumn(name = "concept_system"))
     private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
+
+    @Column(name = "total_row_count")
+    private Long totalRowCount;
 
     public DimensionalDataSet() {
     }
@@ -376,6 +384,14 @@ public class DimensionalDataSet implements Serializable {
 
     public void setDimensionalDataPoints(List<DimensionalDataPoint> dimensionalDataPoints) {
         this.dimensionalDataPoints = dimensionalDataPoints;
+    }
+
+    public Long getTotalRowCount() {
+        return totalRowCount;
+    }
+
+    public void setTotalRowCount(Long totalRowCount) {
+        this.totalRowCount = totalRowCount;
     }
 
     /**
