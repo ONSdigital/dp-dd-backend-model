@@ -24,8 +24,10 @@ public class HierarchyEntry {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
+    @Column(nullable = false)
     private String code;
 
     private String name;

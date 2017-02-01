@@ -11,15 +11,16 @@ public class DimensionValue {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
     @Column(name = "dimensional_data_set_id", columnDefinition = "uuid", nullable = false)
     private UUID dimensionalDataSetId;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "value", nullable = false)
+    @Column(nullable = false)
     private String value;
 
     @ManyToOne

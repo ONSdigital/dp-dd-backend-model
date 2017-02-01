@@ -10,6 +10,7 @@ public class DataPoint {
 
 
     @Id
+    @Column(columnDefinition = "uuid")
     private UUID id;
 
     private float observation;
@@ -27,9 +28,7 @@ public class DataPoint {
             @JoinColumn(name = "id")
     }
             , inverseJoinColumns = {
-            @JoinColumn(name = "dds_id", referencedColumnName = "dimensional_data_set_id"),
-            @JoinColumn(name = "dimension_name", referencedColumnName = "name"),
-            @JoinColumn(name = "dimension_value", referencedColumnName = "value")
+            @JoinColumn(name = "dimension_value_id", referencedColumnName = "id"),
     }
     )
     private List<DimensionValue> dimensionValues;
