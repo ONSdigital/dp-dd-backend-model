@@ -31,6 +31,7 @@ public class DimensionValue {
     }
 
     public DimensionValue(UUID dimensionalDataSetId, String name, String value) {
+        this.id = UUID.randomUUID();
         this.dimensionalDataSetId = dimensionalDataSetId;
         this.name = name;
         this.value = value;
