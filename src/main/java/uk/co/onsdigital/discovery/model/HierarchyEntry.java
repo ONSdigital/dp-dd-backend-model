@@ -12,44 +12,40 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The persistent class for the hierarchy_entry database table.
  */
 @Entity
-@Table(name = "hierarchy_entry", uniqueConstraints=@UniqueConstraint(columnNames={"hierarchy_id", "value_code"}))
-@IdClass(HierarchyEntry.HierarchyEntryId.class)
+@Table(name = "hierarchy_entry", uniqueConstraints = @UniqueConstraint(columnNames={"hierarchy_id", "code"}))
 public class HierarchyEntry {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "hierarchy_id")
-    private String hierarchyId;
+    @Column(columnDefinition = "uuid")
+    private UUID id;
 
-    @Id
-    @Column(name = "value_code")
+    @Column(nullable = false)
     private String code;
 
-    @Column(name = "value_name")
     private String name;
 
     @Column(name = "display_order")
     private Integer displayOrder;
 
     @ManyToOne
-    @JoinColumn(name = "level_type")
+    @JoinColumn(name = "hierarchy_level_type_id")
     private HierarchyLevelType levelType;
 
     @ManyToOne
-    @JoinColumn(name = "hierarchy_id", updatable = false, insertable = false)
+    @JoinColumn(name = "hierarchy_id", nullable = false)
     private Hierarchy hierarchy;
 
-    // bi-directional many-to-one relationship defining the hierarchy. This is the owner side.
+    // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "hierarchy_id", referencedColumnName = "hierarchy_id", updatable = false, insertable = false),
-            @JoinColumn(name = "parent_code", referencedColumnName = "value_code")})
+    @JoinColumn(name = "parent", referencedColumnName = "id")
     private HierarchyEntry parent;
 
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.
@@ -112,27 +108,4 @@ public class HierarchyEntry {
         this.children = children;
     }
 
-    /**
-     * The id fields of a HierarchyEntry.
-     */
-    static class HierarchyEntryId implements Serializable {
-        private String hierarchyId;
-        private String code;
-
-        public String getHierarchyId() {
-            return hierarchyId;
-        }
-
-        public void setHierarchyId(String hierarchyId) {
-            this.hierarchyId = hierarchyId;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-    }
 }
