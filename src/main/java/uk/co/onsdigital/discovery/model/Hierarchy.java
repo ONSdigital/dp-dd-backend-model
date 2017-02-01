@@ -15,7 +15,6 @@ public class Hierarchy {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(columnDefinition = "uuid")
     private String id;
 
     private String name;
