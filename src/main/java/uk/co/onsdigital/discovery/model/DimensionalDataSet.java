@@ -64,12 +64,13 @@ public class DimensionalDataSet implements Serializable {
     @Column(name = "load_exception")
     private String loadException;
 
+    @Column(columnDefinition = "text")
     private String metadata;
 
     @Column(name = "major_version", nullable = false)
     private int majorVersion;
 
-    @Column(name = "minor_version")
+    @Column(name = "minor_version", nullable = false)
     private int minorVersion = 0;
 
     private String modified;
