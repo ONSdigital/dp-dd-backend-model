@@ -136,7 +136,7 @@ public class HierarchyEntry {
         return "HierarchyEntry{" +
                 "code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", hierarchy=" + hierarchy +
+                ", hierarchyId='" + hierarchyId + '\'' +
                 '}';
     }
 }
