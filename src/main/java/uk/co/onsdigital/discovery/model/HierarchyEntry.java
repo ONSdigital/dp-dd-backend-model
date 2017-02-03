@@ -3,14 +3,13 @@ package uk.co.onsdigital.discovery.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,9 +18,19 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "hierarchy_entry", uniqueConstraints = @UniqueConstraint(columnNames={"hierarchy_id", "code"}))
+@NamedQueries({
+        @NamedQuery(name = HierarchyEntry.FIND_QUERY, query = "SELECT he FROM HierarchyEntry he where he.hierarchy.id = :hierarchyId and he.code = :code"),
+})
 public class HierarchyEntry {
 
     private static final long serialVersionUID = 1L;
+
+    /** Named query to find an entry by hierarchy id and code. */
+    public static final String FIND_QUERY = "HierarchyEntry.findByHierarchyAndCode";
+    /** Query param specifying the hierarchy id. */
+    public static final String HIERARCHY_ID_PARAM = "hierarchyId";
+    /** Query param specifying the code of the hierarchy entry. */
+    public static final String CODE_PARAM = "code";
 
     @Id
     @Column(columnDefinition = "uuid")
@@ -51,6 +60,14 @@ public class HierarchyEntry {
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.
     @OneToMany(mappedBy = "parent")
     private List<HierarchyEntry> children;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getCode() {
         return code;
@@ -108,4 +125,12 @@ public class HierarchyEntry {
         this.children = children;
     }
 
+    @Override
+    public String toString() {
+        return "HierarchyEntry{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", hierarchy='" + hierarchy + '\'' +
+                '}';
+    }
 }

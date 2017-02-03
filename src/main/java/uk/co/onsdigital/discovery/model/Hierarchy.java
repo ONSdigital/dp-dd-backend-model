@@ -1,6 +1,5 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -43,5 +42,12 @@ public class Hierarchy {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Hierarchy{" +
+                "id='" + id + '\'' +
+                '}';
     }
 }
