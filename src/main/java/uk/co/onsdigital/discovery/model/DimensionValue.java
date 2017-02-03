@@ -13,13 +13,13 @@ public class DimensionValue {
 
     private static final long serialVersionUID = 1L;
 
-    // Named query to find a DimensionValue by dataset id, name and value.
+    /** Named query to find a DimensionValue by dataset id, name and value. */
     public static final String FIND_QUERY = "DimensionValue.findByDatasetIdNameAndValue";
-    // Parameter specifying the id of the dimensional dataset.
+    /** Parameter specifying the id of the dimensional dataset. */
     public static final String DATASET_ID_PARAM = "ddsId";
-    // Parameter specifying the name of the dimension.
+    /** Parameter specifying the name of the dimension. */
     public static final String NAME_PARAM = "name";
-    // Parameter specifying the value of the dimension.
+    /** Parameter specifying the value of the dimension. */
     public static final String VALUE_PARAM = "value";
 
     @Id

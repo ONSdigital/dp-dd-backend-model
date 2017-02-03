@@ -19,17 +19,17 @@ import java.util.UUID;
 @Entity
 @Table(name = "hierarchy_entry", uniqueConstraints = @UniqueConstraint(columnNames={"hierarchy_id", "code"}))
 @NamedQueries({
-        @NamedQuery(name = HierarchyEntry.FIND_QUERY, query = "SELECT he FROM HierarchyEntry he where he.hierarchyId = :hierarchyId and he.code = :code"),
+        @NamedQuery(name = HierarchyEntry.FIND_QUERY, query = "SELECT he FROM HierarchyEntry he where he.hierarchy.id = :hierarchyId and he.code = :code"),
 })
 public class HierarchyEntry {
 
     private static final long serialVersionUID = 1L;
 
-    // Named query to find an entry by hierarchy id and code.
+    /** Named query to find an entry by hierarchy id and code. */
     public static final String FIND_QUERY = "HierarchyEntry.findByHierarchyAndCode";
-    // Query param specifying the hierarchy id.
+    /** Query param specifying the hierarchy id. */
     public static final String HIERARCHY_ID_PARAM = "hierarchyId";
-    // Query param specifying the code of the hierarchy entry.
+    /** Query param specifying the code of the hierarchy entry. */
     public static final String CODE_PARAM = "code";
 
     @Id
@@ -51,8 +51,6 @@ public class HierarchyEntry {
     @ManyToOne
     @JoinColumn(name = "hierarchy_id", nullable = false)
     private Hierarchy hierarchy;
-    @Column(name="hierarchy_id",updatable = false, insertable = false)
-    private String hierarchyId;
 
     // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
     @ManyToOne
@@ -99,10 +97,6 @@ public class HierarchyEntry {
         return hierarchy;
     }
 
-    public String getHierarchyId() {
-        return hierarchyId;
-    }
-
     public void setHierarchy(Hierarchy hierarchy) {
         this.hierarchy = hierarchy;
     }
@@ -136,7 +130,7 @@ public class HierarchyEntry {
         return "HierarchyEntry{" +
                 "code='" + code + '\'' +
                 ", name='" + name + '\'' +
-                ", hierarchyId='" + hierarchyId + '\'' +
+                ", hierarchy='" + hierarchy + '\'' +
                 '}';
     }
 }
