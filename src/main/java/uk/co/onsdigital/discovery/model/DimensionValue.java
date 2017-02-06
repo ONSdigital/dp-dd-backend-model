@@ -1,7 +1,7 @@
 package uk.co.onsdigital.discovery.model;
 
-import org.eclipse.persistence.annotations.BatchFetch;
-import org.eclipse.persistence.annotations.BatchFetchType;
+import org.eclipse.persistence.annotations.JoinFetch;
+import org.eclipse.persistence.annotations.JoinFetchType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class DimensionValue {
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_entry_id")
-    @BatchFetch(BatchFetchType.JOIN)
+    @JoinFetch(JoinFetchType.OUTER)
     private HierarchyEntry hierarchyEntry;
 
     public DimensionValue() {
