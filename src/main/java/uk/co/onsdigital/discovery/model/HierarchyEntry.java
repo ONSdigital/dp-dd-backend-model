@@ -1,16 +1,16 @@
 package uk.co.onsdigital.discovery.model;
 
+import org.eclipse.persistence.annotations.JoinFetch;
+import org.eclipse.persistence.annotations.JoinFetchType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +37,7 @@ public class HierarchyEntry {
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_level_type_id")
+    @JoinFetch(JoinFetchType.OUTER)
     private HierarchyLevelType levelType;
 
     @ManyToOne
@@ -46,6 +47,7 @@ public class HierarchyEntry {
     // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
     @ManyToOne
     @JoinColumn(name = "parent", referencedColumnName = "id")
+    @JoinFetch(JoinFetchType.OUTER)
     private HierarchyEntry parent;
 
     // bi-directional one-to-many relationship defining the hierarchy. Owned by the children.

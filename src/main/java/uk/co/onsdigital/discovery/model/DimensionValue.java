@@ -1,14 +1,20 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.eclipse.persistence.annotations.BatchFetch;
+import org.eclipse.persistence.annotations.BatchFetchType;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.UUID;
 
 @Entity
 @Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimensional_data_set_id", "name", "value"}))
 public class DimensionValue {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(columnDefinition = "uuid")
@@ -17,14 +23,15 @@ public class DimensionValue {
     @Column(name = "dimensional_data_set_id", columnDefinition = "uuid", nullable = false)
     private UUID dimensionalDataSetId;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "value", nullable = false)
     private String value;
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_entry_id")
+    @BatchFetch(BatchFetchType.JOIN)
     private HierarchyEntry hierarchyEntry;
 
     public DimensionValue() {
@@ -35,6 +42,10 @@ public class DimensionValue {
         this.dimensionalDataSetId = dimensionalDataSetId;
         this.name = name;
         this.value = value;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public HierarchyEntry getHierarchyEntry() {
