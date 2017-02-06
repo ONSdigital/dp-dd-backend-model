@@ -8,13 +8,25 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimensional_data_set_id", "name", "value"}))
+@NamedQueries({
+        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dim FROM DimensionValue dim WHERE dim.dimensionalDataSetId = :ddsId AND dim.name = :name AND dim.value = :value")
+})
 public class DimensionValue {
+
+    /** Named query to find a DimensionValue by dataset id, name and value. */
+    public static final String FIND_QUERY = "DimensionValue.findByDatasetIdNameAndValue";
+    /** Parameter specifying the id of the dimensional dataset. */
+    public static final String DATASET_ID_PARAM = "ddsId";
+    /** Parameter specifying the name of the dimension. */
+    public static final String NAME_PARAM = "name";
+    /** Parameter specifying the value of the dimension. */
+    public static final String VALUE_PARAM = "value";
 
     @Id
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "dimensional_data_set_id", columnDefinition = "uuid", nullable = false)
+    @Column(name = "dimensional_data_set_id", columnDefinition = "uuid not null", nullable = false)
     private UUID dimensionalDataSetId;
 
     @Column(name = "name", nullable = false)
@@ -40,6 +52,10 @@ public class DimensionValue {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public HierarchyEntry getHierarchyEntry() {
@@ -74,4 +90,12 @@ public class DimensionValue {
         this.value = value;
     }
 
+    @Override
+    public String toString() {
+        return "DimensionValue{" +
+                "dimensionalDataSetId=" + dimensionalDataSetId +
+                ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

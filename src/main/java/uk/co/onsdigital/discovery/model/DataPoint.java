@@ -2,21 +2,22 @@ package uk.co.onsdigital.discovery.model;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class DataPoint {
 
-
     @Id
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private float observation;
+    @Column(columnDefinition = "numeric not null")
+    private BigDecimal observation;
 
-    @Column(name = "observation_type_value")
-    private float observationTypeValue;
+    @Column(name = "observation_type_value", columnDefinition = "numeric")
+    private BigDecimal observationTypeValue;
 
     @Column(name = "data_marking")
     private String dataMarking;
@@ -24,12 +25,8 @@ public class DataPoint {
     @ManyToMany
     @JoinTable(
             name = "dimension_datapoint"
-            , joinColumns = {
-            @JoinColumn(name = "id")
-    }
-            , inverseJoinColumns = {
-            @JoinColumn(name = "dimension_value_id", referencedColumnName = "id"),
-    }
+            , joinColumns = {@JoinColumn(name = "id")}
+            , inverseJoinColumns = {@JoinColumn(name = "dimension_value_id", referencedColumnName = "id")}
     )
     private List<DimensionValue> dimensionValues;
 
@@ -42,19 +39,19 @@ public class DataPoint {
         this.id = id;
     }
 
-    public float getObservation() {
+    public BigDecimal getObservation() {
         return observation;
     }
 
-    public void setObservation(float observation) {
+    public void setObservation(BigDecimal observation) {
         this.observation = observation;
     }
 
-    public float getObservationTypeValue() {
+    public BigDecimal getObservationTypeValue() {
         return observationTypeValue;
     }
 
-    public void setObservationTypeValue(float observationTypeValue) {
+    public void setObservationTypeValue(BigDecimal observationTypeValue) {
         this.observationTypeValue = observationTypeValue;
     }
 
