@@ -1,7 +1,9 @@
 package uk.co.onsdigital.discovery.model;
 
+import org.eclipse.persistence.annotations.JoinFetch;
+import org.eclipse.persistence.annotations.JoinFetchType;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
@@ -10,8 +12,6 @@ import java.util.UUID;
         @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dim FROM DimensionValue dim WHERE dim.dimensionalDataSetId = :ddsId AND dim.name = :name AND dim.value = :value")
 })
 public class DimensionValue {
-
-    private static final long serialVersionUID = 1L;
 
     /** Named query to find a DimensionValue by dataset id, name and value. */
     public static final String FIND_QUERY = "DimensionValue.findByDatasetIdNameAndValue";
@@ -29,14 +29,15 @@ public class DimensionValue {
     @Column(name = "dimensional_data_set_id", columnDefinition = "uuid not null", nullable = false)
     private UUID dimensionalDataSetId;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "value", nullable = false)
     private String value;
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_entry_id")
+    @JoinFetch(JoinFetchType.OUTER)
     private HierarchyEntry hierarchyEntry;
 
     public DimensionValue() {
