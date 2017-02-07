@@ -14,6 +14,7 @@ import java.util.UUID;
 @Table(name = "hierarchy_entry", uniqueConstraints = @UniqueConstraint(columnNames={"hierarchy_id", "code"}))
 @NamedQueries({
         @NamedQuery(name = HierarchyEntry.FIND_QUERY, query = "SELECT he FROM HierarchyEntry he where he.hierarchy.id = :hierarchyId and he.code = :code"),
+        @NamedQuery(name = HierarchyEntry.FIND_BY_HIERARCHY_ID, query = "SELECT he FROM HierarchyEntry he WHERE he.hierarchy.id = :hierarchyId ORDER BY he.displayOrder")
 })
 public class HierarchyEntry {
 
@@ -21,6 +22,10 @@ public class HierarchyEntry {
 
     /** Named query to find an entry by hierarchy id and code. */
     public static final String FIND_QUERY = "HierarchyEntry.findByHierarchyAndCode";
+
+    /** Named query to find all entries in a given hierarchy. */
+    public static final String FIND_BY_HIERARCHY_ID = "HierarchyEntry.findByHierarchy";
+
     /** Query param specifying the hierarchy id. */
     public static final String HIERARCHY_ID_PARAM = "hierarchyId";
     /** Query param specifying the code of the hierarchy entry. */
