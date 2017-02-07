@@ -1,15 +1,18 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * The persistent class for the hierarchy database table.
  */
 @Entity
 @Table(name = "hierarchy")
+@NamedQueries({
+        @NamedQuery(name = Hierarchy.FIND_ALL, query = "SELECT h FROM Hierarchy h ORDER BY h.name")
+})
 public class Hierarchy {
+
+    public static final String FIND_ALL = "Hierarchy.findAll";
 
     private static final long serialVersionUID = 1L;
 
