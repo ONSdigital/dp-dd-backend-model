@@ -49,7 +49,7 @@ public class HierarchyEntry {
     private HierarchyLevelType levelType;
 
     @ManyToOne
-    @JoinColumn(name = "hierarchy_id", nullable = false)
+    @JoinColumn(name = "hierarchy_id", referencedColumnName = "id", nullable = false)
     private Hierarchy hierarchy;
 
     // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
