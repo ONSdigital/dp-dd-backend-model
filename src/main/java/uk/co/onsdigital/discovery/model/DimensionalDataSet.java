@@ -1,16 +1,8 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.eclipse.persistence.annotations.Indexes;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +14,12 @@ import java.util.stream.Stream;
  * The persistent class for the dimensional_data_set database table.
  */
 @Entity
-@Table(name = "dimensional_data_set")
+@Table(name = "dimensional_data_set",
+       indexes = {
+        @Index(name = "editions", columnList = "dataresource,major_label,minor_version", unique = false),
+        @Index(name = "versions", columnList = "dataresource,major_version,minor_version", unique = true),
+       }
+)
 @NamedQueries({
         @NamedQuery(name = "DimensionalDataSet.findAll", query = "SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
         @NamedQuery(name = "DimensionalDataSet.count", query = "SELECT COUNT(d) FROM DimensionalDataSet d")
@@ -66,6 +63,10 @@ public class DimensionalDataSet implements Serializable {
 
     @Column(columnDefinition = "text")
     private String metadata;
+
+    // add major version label that represents "edition" in our URI path and what we expose as terminology
+    @Column(name = "major_label")
+    private String majorLabel;
 
     @Column(name = "major_version", nullable = false)
     private int majorVersion;
@@ -393,6 +394,14 @@ public class DimensionalDataSet implements Serializable {
 
     public void setTotalRowCount(Long totalRowCount) {
         this.totalRowCount = totalRowCount;
+    }
+
+    public String getMajorLabel() {
+        return majorLabel;
+    }
+
+    public void setMajorLabel(String majorLabel) {
+        this.majorLabel = majorLabel;
     }
 
     /**
