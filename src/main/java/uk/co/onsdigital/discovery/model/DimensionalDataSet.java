@@ -1,16 +1,6 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -127,6 +117,9 @@ public class DimensionalDataSet implements Serializable {
     @JoinTable(name = "dimensional_data_set_concept_system", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
             inverseJoinColumns = @JoinColumn(name = "concept_system"))
     private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
+
+    @OneToMany(mappedBy = "dataSet")
+    private List<Dimension> dimensions;
 
     @Column(name = "total_row_count")
     private Long totalRowCount;
@@ -469,6 +462,14 @@ public class DimensionalDataSet implements Serializable {
         presentation.setDimensionalDataSet(null);
 
         return presentation;
+    }
+
+    public List<Dimension> getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(List<Dimension> dimensions) {
+        this.dimensions = dimensions;
     }
 
     @Override
