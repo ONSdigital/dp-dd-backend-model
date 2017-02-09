@@ -1,7 +1,5 @@
 package uk.co.onsdigital.discovery.model;
 
-import org.eclipse.persistence.annotations.Indexes;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,8 +14,8 @@ import java.util.stream.Stream;
 @Entity
 @Table(name = "dimensional_data_set",
        indexes = {
-        @Index(name = "editions", columnList = "dataresource,major_label,minor_version", unique = false),
-        @Index(name = "versions", columnList = "dataresource,major_version,minor_version", unique = true),
+        @Index(name = "editions", columnList = "data_resource,major_label,minor_version", unique = false),
+        @Index(name = "versions", columnList = "data_resource,major_version,minor_version", unique = true),
        }
 )
 @NamedQueries({
