@@ -127,6 +127,9 @@ public class DimensionalDataSet implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "concept_system"))
     private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
 
+    @OneToMany(mappedBy = "dataSet")
+    private List<Dimension> dimensions;
+
     @Column(name = "total_row_count")
     private Long totalRowCount;
 
@@ -476,6 +479,14 @@ public class DimensionalDataSet implements Serializable {
         presentation.setDimensionalDataSet(null);
 
         return presentation;
+    }
+
+    public List<Dimension> getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(List<Dimension> dimensions) {
+        this.dimensions = dimensions;
     }
 
     @Override

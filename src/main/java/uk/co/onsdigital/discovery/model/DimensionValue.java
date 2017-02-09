@@ -9,7 +9,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimensional_data_set_id", "name", "value"}))
 @NamedQueries({
-        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dim FROM DimensionValue dim WHERE dim.dimensionalDataSetId = :ddsId AND dim.name = :name AND dim.value = :value")
+        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dim FROM DimensionValue dim WHERE dim.dimension.dataSet.id = :ddsId AND dim.dimension.name = :name AND dim.value = :value")
 })
 public class DimensionValue {
 
@@ -26,11 +26,12 @@ public class DimensionValue {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    @Column(name = "dimensional_data_set_id", columnDefinition = "uuid not null", nullable = false)
-    private UUID dimensionalDataSetId;
-
-    @Column(name = "name", nullable = false)
-    private String name;
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "dimensional_data_set_id", referencedColumnName = "dimensional_data_set_id", columnDefinition = "uuid not null", nullable = false),
+            @JoinColumn(name = "name", referencedColumnName = "name", nullable = false)
+    })
+    private Dimension dimension;
 
     @Column(name = "value", nullable = false)
     private String value;
@@ -43,10 +44,8 @@ public class DimensionValue {
     public DimensionValue() {
     }
 
-    public DimensionValue(UUID dimensionalDataSetId, String name, String value) {
+    public DimensionValue(String value) {
         this.id = UUID.randomUUID();
-        this.dimensionalDataSetId = dimensionalDataSetId;
-        this.name = name;
         this.value = value;
     }
 
@@ -66,22 +65,6 @@ public class DimensionValue {
         this.hierarchyEntry = hierarchyEntry;
     }
 
-    public UUID getDimensionalDataSetId() {
-        return dimensionalDataSetId;
-    }
-
-    public void setDimensionalDataSetId(UUID dimensionalDataSetId) {
-        this.dimensionalDataSetId = dimensionalDataSetId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getValue() {
         return value;
     }
@@ -90,11 +73,18 @@ public class DimensionValue {
         this.value = value;
     }
 
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+
     @Override
     public String toString() {
         return "DimensionValue{" +
-                "dimensionalDataSetId=" + dimensionalDataSetId +
-                ", name='" + name + '\'' +
+                "dimension=" + dimension +
                 ", value='" + value + '\'' +
                 '}';
     }
