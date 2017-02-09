@@ -66,7 +66,7 @@ ALTER TABLE dimension_datapoint ADD CONSTRAINT FK_dimension_datapoint_id FOREIGN
 ALTER TABLE dimension_datapoint ADD CONSTRAINT FK_dimension_datapoint_dimension_value_id FOREIGN KEY (dimension_value_id) REFERENCES dimension_value (ID);
 ALTER TABLE dimensional_data_set_concept_system ADD CONSTRAINT FK_dimensional_data_set_concept_system_dimensional_data_set_id FOREIGN KEY (dimensional_data_set_id) REFERENCES dimensional_data_set (dimensional_data_set_id);
 ALTER TABLE dimensional_data_set_concept_system ADD CONSTRAINT FK_dimensional_data_set_concept_system_concept_system FOREIGN KEY (concept_system) REFERENCES concept_system (concept_system);
-ALTER TABLE dimension ADD CONSTRAINT fk_dimension_dimensional_data_set_id FOREIGN KEY (dimensional_data_set_id) REFERENCES dimensional_data_set_id(dimensional_data_set_id);
+ALTER TABLE dimension ADD CONSTRAINT fk_dimension_dimensional_data_set_id FOREIGN KEY (dimensional_data_set_id) REFERENCES dimensional_data_set(dimensional_data_set_id);
 ALTER TABLE dimension ADD CONSTRAINT fk_dimension_hierarchy_id FOREIGN KEY (hierarchy_id) REFERENCES hierarchy(id);
 CREATE SEQUENCE presseq START WITH 1;
 CREATE SEQUENCE timeseq START WITH 1;
