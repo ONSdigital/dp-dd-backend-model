@@ -34,7 +34,7 @@ public class Dimension {
     private List<DimensionValue> values;
 
     @ManyToOne
-    @JoinColumn(name = "hierarchy_id", referencedColumnName = "id", columnDefinition = "uuid", insertable = false, updatable = false)
+    @JoinColumn(name = "hierarchy_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Hierarchy hierarchy;
 
     public Dimension() {
