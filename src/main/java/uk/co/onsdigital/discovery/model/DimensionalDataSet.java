@@ -21,12 +21,14 @@ import java.util.stream.Stream;
 @NamedQueries({
         @NamedQuery(name = "DimensionalDataSet.findAll", query = "SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
         @NamedQuery(name = "DimensionalDataSet.count", query = "SELECT COUNT(d) FROM DimensionalDataSet d"),
-        @NamedQuery(name = "DimensionalDataSet.findByEditionVersion",
+        @NamedQuery(name = DimensionalDataSet.FIND_BY_EDITION_VERSION,
                     query = "SELECT d FROM DimensionalDataSet d WHERE d.major_label = :edition AND d.minor_version = :version ORDER BY d.s3URL"
         )
 })
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    public static final String FIND_BY_EDITION_VERSION = "DimensionalDataSet.findByEditionVersion";
 
     // The status of a dataset when created, until all rows have been ingested
     public static final String STATUS_NEW = "new";
