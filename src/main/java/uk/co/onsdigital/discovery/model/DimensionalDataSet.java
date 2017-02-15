@@ -22,8 +22,7 @@ import java.util.stream.Stream;
         @NamedQuery(name = "DimensionalDataSet.findAll", query = "SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
         @NamedQuery(name = "DimensionalDataSet.count", query = "SELECT COUNT(d) FROM DimensionalDataSet d"),
         @NamedQuery(name = DimensionalDataSet.FIND_BY_EDITION_VERSION,
-                    query = "SELECT d FROM DimensionalDataSet d WHERE d.major_label = :" + DimensionalDataSet.EDITION_PARAM +
-                            " AND d.minor_version = :" + DimensionalDataSet.VERSION_PARAM + " ORDER BY d.s3URL"
+                    query = "SELECT d FROM DimensionalDataSet d WHERE d.majorLabel = :edition AND d.minorVersion = :version ORDER BY d.s3URL"
         )
 })
 public class DimensionalDataSet implements Serializable {
