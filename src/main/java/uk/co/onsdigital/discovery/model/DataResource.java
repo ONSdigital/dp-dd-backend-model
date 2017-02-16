@@ -1,13 +1,6 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +10,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "data_resource")
-@NamedQuery(name = "DataResource.findAll", query = "SELECT d FROM DataResource d")
+@NamedQueries({
+        @NamedQuery(name = "DataResource.findAll", query = "SELECT d FROM DataResource d"),
+        @NamedQuery(name = "DataResource.count", query = "SELECT Count(d) FROM DataResource d")
+})
 public class DataResource implements Serializable {
     private static final long serialVersionUID = 1L;
 
