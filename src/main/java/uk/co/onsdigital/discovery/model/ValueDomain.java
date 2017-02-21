@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "value_domain")
-@NamedQuery(name = "ValueDomain.findAll", query = "SELECT v FROM ValueDomain v")
+@NamedQuery(name = ValueDomain.FIND_ALL_QUERY, query = "SELECT v FROM ValueDomain v")
 public class ValueDomain implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "ValueDomain.findAll";
 
     @Id
     @Column(name = "value_domain")

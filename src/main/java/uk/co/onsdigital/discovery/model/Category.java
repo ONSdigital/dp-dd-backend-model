@@ -21,10 +21,11 @@ import java.util.List;
  * The persistent class for the category database table.
  */
 @Entity
-@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+@NamedQuery(name = Category.FIND_ALL_QUERY, query = "SELECT c FROM Category c")
 @Table(indexes = {@Index(columnList = "name,concept_system")})
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "Category.findAll";
 
     @Id
     @SequenceGenerator(name = "catseq", sequenceName = "catseq", allocationSize = 1, initialValue = 1)

@@ -15,9 +15,10 @@ import java.io.Serializable;
  * The persistent class for the presentation database table.
  */
 @Entity
-@NamedQuery(name = "Presentation.findAll", query = "SELECT p FROM Presentation p")
+@NamedQuery(name = Presentation.FIND_ALL_QUERY, query = "SELECT p FROM Presentation p")
 public class Presentation implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY =  "Population.findAll";
 
     @Id
     @SequenceGenerator(name = "presseq", sequenceName = "presseq", allocationSize = 1, initialValue = 1)

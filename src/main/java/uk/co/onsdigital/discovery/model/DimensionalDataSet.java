@@ -19,20 +19,24 @@ import java.util.stream.Stream;
        }
 )
 @NamedQueries({
-        @NamedQuery(name = "DimensionalDataSet.findAll", query = "SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
-        @NamedQuery(name = "DimensionalDataSet.count", query = "SELECT COUNT(d) FROM DimensionalDataSet d"),
+        @NamedQuery(name = DimensionalDataSet.FIND_ALL_QUERY, query = "SELECT d FROM DimensionalDataSet d ORDER BY d.s3URL"),
+        @NamedQuery(name = DimensionalDataSet.COUNT_QUERY, query = "SELECT COUNT(d) FROM DimensionalDataSet d"),
         @NamedQuery(name = DimensionalDataSet.FIND_BY_EDITION_VERSION,
                     query = "SELECT d FROM DimensionalDataSet d " +
-                            "WHERE d.majorLabel = :edition AND d.minorVersion = :version AND d.dataResource.id = :dataResource ORDER BY d.s3URL"
-        )
+                            "WHERE d.majorLabel = :edition AND d.minorVersion = :version AND d.dataResource.id = :dataResource ORDER BY d.s3URL"),
+        @NamedQuery(name = DimensionalDataSet.FIND_BY_ID, query = "SELECT d FROM DimensionalDataSet d WHERE d.id = :id")
 })
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final String FIND_ALL_QUERY = "DimensionalDataSet.findAll";
+    public static final String COUNT_QUERY = "DimensionalDataSet.count";
     public static final String FIND_BY_EDITION_VERSION = "DimensionalDataSet.findByEditionVersion";
+    public static final String FIND_BY_ID = "DimensionalDataSet.findById";
     public static final String EDITION_PARAM = "edition";
     public static final String VERSION_PARAM = "version";
     public static final String DATA_RESOURCE_PARAM = "dataResource";
+    public static final String ID_PARAM = "id";
 
     // The status of a dataset when created, until all rows have been ingested
     public static final String STATUS_NEW = "new";
