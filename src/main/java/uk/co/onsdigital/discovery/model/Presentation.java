@@ -18,7 +18,7 @@ import java.io.Serializable;
 @NamedQuery(name = Presentation.FIND_ALL_QUERY, query = "SELECT p FROM Presentation p")
 public class Presentation implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String FIND_ALL_QUERY =  "Population.findAll";
+    public static final String FIND_ALL_QUERY =  "Presentation.findAll";
 
     @Id
     @SequenceGenerator(name = "presseq", sequenceName = "presseq", allocationSize = 1, initialValue = 1)
