@@ -1,5 +1,5 @@
 -- Job Creator API user. Needs CRUD permissions on its own job status tables, minimal SELECT permissions otherwise.
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE job, file_status, job_file_status TO job_creator;
+GRANT ALL PRIVILEGES ON TABLE job, file_status, job_file_status TO job_creator;
 GRANT SELECT ON TABLE dimensional_data_set TO job_creator; -- Needed to lookup S3 URL
 
 -- Metadata API user. Needs read-only permissions on most of the schema.
