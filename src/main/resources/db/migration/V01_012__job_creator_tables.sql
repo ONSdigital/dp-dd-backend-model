@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS "file_status" (
   CONSTRAINT pk_file_status PRIMARY KEY ("name")
 )
 WITH (OIDS=FALSE);
-ALTER TABLE "file_status" OWNER TO "data_discovery";
 
 -- ----------------------------
 --  Table structure for job
@@ -35,7 +34,6 @@ CREATE TABLE IF NOT EXISTS "job" (
   CONSTRAINT pk_job PRIMARY KEY ("job_id")
 )
 WITH (OIDS=FALSE);
-ALTER TABLE "job" OWNER TO "data_discovery";
 
 -- ----------------------------
 --  Table structure for job_file_status
@@ -48,5 +46,4 @@ CREATE TABLE IF NOT EXISTS "job_file_status" (
   CONSTRAINT "fk_job_file_status_job_job_id" FOREIGN KEY ("job_job_id") REFERENCES "job" ("job_id")
 )
 WITH (OIDS=FALSE);
-ALTER TABLE "job_file_status" OWNER TO "data_discovery";
 
