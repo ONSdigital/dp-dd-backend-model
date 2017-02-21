@@ -21,10 +21,11 @@ import java.util.List;
  * The persistent class for the variable database table.
  */
 @Entity
-@NamedQuery(name = "Variable.findAll", query = "SELECT v FROM Variable v")
+@NamedQuery(name = Variable.FIND_ALL_QUERY, query = "SELECT v FROM Variable v")
 @Table(indexes = {@Index(columnList = "name")})
 public class Variable implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "Variable.findAll";
 
     @Id
     @SequenceGenerator(name = "varseq", sequenceName = "varseq", allocationSize = 1, initialValue = 1)

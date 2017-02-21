@@ -15,9 +15,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "geographic_area_hierarchy")
-@NamedQuery(name = "GeographicAreaHierarchy.findAll", query = "SELECT g FROM GeographicAreaHierarchy g")
+@NamedQuery(name = GeographicAreaHierarchy.FIND_ALL_QUERY, query = "SELECT g FROM GeographicAreaHierarchy g")
 public class GeographicAreaHierarchy implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "GeographicAreaHierarchy.findAll";
 
     @Id
     @Column(name = "geographic_area_hierarchy")

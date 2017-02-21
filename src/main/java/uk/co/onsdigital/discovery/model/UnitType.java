@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "unit_type")
-@NamedQuery(name = "UnitType.findAll", query = "SELECT u FROM UnitType u")
+@NamedQuery(name = UnitType.FIND_ALL_QUERY, query = "SELECT u FROM UnitType u")
 public class UnitType implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "UnitType.findAll";
 
     @Id
     @Column(name = "unit_type")

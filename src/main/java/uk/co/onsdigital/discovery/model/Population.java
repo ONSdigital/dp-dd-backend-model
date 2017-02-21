@@ -14,9 +14,10 @@ import java.util.List;
  * The persistent class for the population database table.
  */
 @Entity
-@NamedQuery(name = "Population.findAll", query = "SELECT p FROM Population p")
+@NamedQuery(name = Population.FIND_ALL_QUERY, query = "SELECT p FROM Population p")
 public class Population implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY =  "Population.findAll";
 
     @EmbeddedId
     private PopulationPK id;

@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "time_type")
-@NamedQuery(name = "TimeType.findAll", query = "SELECT t FROM TimeType t")
+@NamedQuery(name = TimeType.FIND_ALL_QUERY , query = "SELECT t FROM TimeType t")
 public class TimeType implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "TimeType.findAll";
 
     @Id
     @Column(name = "time_type")

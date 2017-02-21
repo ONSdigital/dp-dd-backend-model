@@ -23,9 +23,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "time_period", indexes = {@Index(columnList = "name")})
-@NamedQuery(name = "TimePeriod.findAll", query = "SELECT t FROM TimePeriod t")
+@NamedQuery(name = TimePeriod.FIND_ALL_QUERY, query = "SELECT t FROM TimePeriod t")
 public class TimePeriod implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "TimePeriod.findAll";
 
     @Id
     @SequenceGenerator(name = "timeseq", sequenceName = "timeseq", allocationSize = 1, initialValue = 1)

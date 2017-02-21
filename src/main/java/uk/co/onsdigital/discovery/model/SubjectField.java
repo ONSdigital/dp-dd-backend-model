@@ -18,9 +18,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "subject_field")
-@NamedQuery(name = "SubjectField.findAll", query = "SELECT s FROM SubjectField s")
+@NamedQuery(name = SubjectField.FIND_ALL_QUERY, query = "SELECT s FROM SubjectField s")
 public class SubjectField implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "SubjectField.findAll";
 
     @Id
     @Column(name = "subject_field")

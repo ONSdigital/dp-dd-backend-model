@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "geographic_level_type")
-@NamedQuery(name = "GeographicLevelType.findAll", query = "SELECT g FROM GeographicLevelType g")
+@NamedQuery(name = GeographicLevelType.FIND_ALL_QUERY, query = "SELECT g FROM GeographicLevelType g")
 public class GeographicLevelType implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "GeographicLevelType.findAll";
 
     @Id
     @Column(name = "geographic_level_type")
