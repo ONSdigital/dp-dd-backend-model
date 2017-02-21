@@ -38,6 +38,7 @@ public class HierarchyEntry {
     @Column(nullable = false)
     private String code;
 
+    @Column(length = 1024)
     private String name;
 
     @Column(name = "display_order")
