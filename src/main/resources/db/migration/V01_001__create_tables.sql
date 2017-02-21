@@ -3,7 +3,7 @@ CREATE INDEX INDEX_CATEGORY_name_concept_system ON CATEGORY (name, concept_syste
 CREATE TABLE concept_system (concept_system VARCHAR(255) NOT NULL, PRIMARY KEY (concept_system));
 CREATE TABLE DATAPOINT (ID uuid, data_marking VARCHAR(255), OBSERVATION numeric not null, observation_type_value numeric, PRIMARY KEY (ID));
 CREATE TABLE data_resource (data_resource VARCHAR(255) NOT NULL, column_concept VARCHAR(255), METADATA VARCHAR(255), row_concept VARCHAR(255), TITLE VARCHAR(255), PRIMARY KEY (data_resource));
-CREATE TABLE dimension(dimensional_data_set_id uuid NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, PRIMARY KEY (dimensional_data_set_id, name));
+CREATE TABLE dimension(dimensional_data_set_id uuid NOT NULL, name VARCHAR(255) NOT NULL, hierarchy_id VARCHAR(255), PRIMARY KEY (dimensional_data_set_id, name));
 CREATE TABLE dimension_value (ID uuid, dimensional_data_set_id uuid not null, name VARCHAR(255) NOT NULL, value VARCHAR(255) NOT NULL, hierarchy_entry_id uuid, PRIMARY KEY (ID));
 CREATE TABLE dimensional_data_point (data_marking VARCHAR(255), observation_type_value VARCHAR(255), VALUE DECIMAL(38), dimensional_data_set_id uuid, geographic_area_id BIGINT NOT NULL, time_period_id BIGINT NOT NULL, variable_id BIGINT NOT NULL, observation_type VARCHAR(255), PRIMARY KEY (dimensional_data_set_id, geographic_area_id, time_period_id, variable_id));
 CREATE TABLE dimensional_data_set (dimensional_data_set_id uuid, authentication_role VARCHAR(255), DISTRIBUTION VARCHAR(255), FREQUENCY VARCHAR(255), IDENTIFIER VARCHAR(255), ISSUED VARCHAR(255), json_metadata VARCHAR(255), KEYWORD VARCHAR(255), LANDINGPAGE VARCHAR(255), LANGUAGE VARCHAR(255), LICENSE VARCHAR(255), load_exception VARCHAR(255), major_label VARCHAR(255), major_version INTEGER NOT NULL, METADATA text, minor_version INTEGER NOT NULL, MODIFIED VARCHAR(255), OBSCOUNT BIGINT, PUBLISHER VARCHAR(255), reference_list VARCHAR(255), revision_notes VARCHAR(255), revision_reason VARCHAR(255), s3_url VARCHAR(255), SOURCE VARCHAR(255), SPATIAL VARCHAR(255), STATUS VARCHAR(255), TEMPORAL VARCHAR(255), THEME VARCHAR(255), title VARCHAR(255), total_row_count BIGINT, validation_exception VARCHAR(255), validation_message VARCHAR(255), data_resource VARCHAR(255), PRIMARY KEY (dimensional_data_set_id));
@@ -40,7 +40,6 @@ ALTER TABLE hierarchy_entry ADD CONSTRAINT UNQ_hierarchy_entry_0 UNIQUE (hierarc
 ALTER TABLE CATEGORY ADD CONSTRAINT FK_CATEGORY_fk_category_id FOREIGN KEY (fk_category_id) REFERENCES CATEGORY (category_id);
 ALTER TABLE CATEGORY ADD CONSTRAINT FK_CATEGORY_concept_system FOREIGN KEY (concept_system) REFERENCES concept_system (concept_system);
 ALTER TABLE dimension_value ADD CONSTRAINT FK_dimension_value_hierarchy_entry_id FOREIGN KEY (hierarchy_entry_id) REFERENCES hierarchy_entry (ID);
-ALTER TABLE dimension_value ADD CONSTRAINT FK_dimension_value_dimension FOREIGN KEY (dimensional_data_set_id, name) REFERENCES dimension(dimensional_data_set_id, name);
 ALTER TABLE dimensional_data_point ADD CONSTRAINT FK_dimensional_data_point_variable_id FOREIGN KEY (variable_id) REFERENCES VARIABLE (variable_id);
 ALTER TABLE dimensional_data_point ADD CONSTRAINT FK_dimensional_data_point_observation_type FOREIGN KEY (observation_type) REFERENCES observation_type (observation_type);
 ALTER TABLE dimensional_data_point ADD CONSTRAINT FK_dimensional_data_point_geographic_area_id FOREIGN KEY (geographic_area_id, time_period_id) REFERENCES POPULATION (geographic_area_id, time_period_id);
@@ -70,6 +69,7 @@ ALTER TABLE dimension_datapoint ADD CONSTRAINT FK_dimension_datapoint_dimension_
 ALTER TABLE dimensional_data_set_concept_system ADD CONSTRAINT FK_dimensional_data_set_concept_system_dimensional_data_set_id FOREIGN KEY (dimensional_data_set_id) REFERENCES dimensional_data_set (dimensional_data_set_id);
 ALTER TABLE dimensional_data_set_concept_system ADD CONSTRAINT FK_dimensional_data_set_concept_system_concept_system FOREIGN KEY (concept_system) REFERENCES concept_system (concept_system);
 ALTER TABLE dimension ADD CONSTRAINT fk_dimension_dimensional_data_set_id FOREIGN KEY (dimensional_data_set_id) REFERENCES dimensional_data_set(dimensional_data_set_id);
+ALTER TABLE dimension ADD CONSTRAINT fk_dimension_hierarchy_id FOREIGN KEY (hierarchy_id) REFERENCES hierarchy(id);
 CREATE SEQUENCE areaseq START WITH 1;
 CREATE SEQUENCE timeseq START WITH 1;
 CREATE SEQUENCE catseq START WITH 1;
