@@ -26,16 +26,15 @@ public class Dimension {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "type", nullable = false)
+    private String type;
+
     @OneToMany
     @JoinColumns({
             @JoinColumn(name = "dimensional_data_set_id", referencedColumnName = "dimensional_data_set_id", columnDefinition = "uuid", insertable = false, updatable = false),
             @JoinColumn(name = "name", referencedColumnName = "name", insertable = false, updatable = false)
     })
     private List<DimensionValue> values;
-
-    @ManyToOne
-    @JoinColumn(name = "hierarchy_id", referencedColumnName = "id")
-    private Hierarchy hierarchy;
 
     public Dimension() {
         // Default constructor for JPA
@@ -71,20 +70,24 @@ public class Dimension {
         this.values = values;
     }
 
-    public Hierarchy getHierarchy() {
-        return hierarchy;
+    public String getType() {
+        return type;
     }
 
-    public void setHierarchy(Hierarchy hierarchy) {
-        this.hierarchy = hierarchy;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isHierarchical() {
+        return !Hierarchy.TYPE_NON_HIERARCHICAL.equals(type);
     }
 
     @Override
     public String toString() {
         return "Dimension{" +
                 "dataSet=" + dataSet +
-                ", name='" + name + '\'' +
-                ", hierarchy=" + hierarchy +
+                ", name='" + name + "'" +
+                ", type='" + type + "'" +
                 '}';
     }
 

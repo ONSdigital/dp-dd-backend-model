@@ -12,6 +12,7 @@ import javax.persistence.*;
 })
 public class Hierarchy {
 
+    public static final String TYPE_NON_HIERARCHICAL = "standard";
     public static final String FIND_ALL = "Hierarchy.findAll";
 
     private static final long serialVersionUID = 1L;
