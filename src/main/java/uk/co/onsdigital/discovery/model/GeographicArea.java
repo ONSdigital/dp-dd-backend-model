@@ -12,9 +12,10 @@ import java.util.List;
 @Table(name = "geographic_area", indexes = {@Index(columnList = "ext_code")},
         uniqueConstraints=@UniqueConstraint(columnNames={"ext_code", "geographic_area_hierarchy"})
 )
-@NamedQuery(name = "GeographicArea.findAll", query = "SELECT g FROM GeographicArea g")
+@NamedQuery(name = GeographicArea.FIND_ALL_QUERY, query = "SELECT g FROM GeographicArea g")
 public class GeographicArea implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "GeographicArea.findAll";
 
     @Id
     @SequenceGenerator(name = "areaseq", sequenceName = "areaseq", allocationSize = 1, initialValue = 1)

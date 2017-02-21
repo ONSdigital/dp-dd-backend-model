@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "presentation_type")
-@NamedQuery(name = "PresentationType.findAll", query = "SELECT p FROM PresentationType p")
+@NamedQuery(name = PresentationType.PRESENTATION_TYPE_FIND_ALL, query = "SELECT p FROM PresentationType p")
 public class PresentationType implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String PRESENTATION_TYPE_FIND_ALL = "PresentationType.findAll";
 
     @Id
     @Column(name = "presentation_type")

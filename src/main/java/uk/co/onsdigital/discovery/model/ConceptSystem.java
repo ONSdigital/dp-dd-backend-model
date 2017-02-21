@@ -18,9 +18,10 @@ import java.util.Objects;
  */
 @Entity
 @Table(name="concept_system")
-@NamedQuery(name="ConceptSystem.findAll", query="SELECT c FROM ConceptSystem c")
+@NamedQuery(name=ConceptSystem.FIND_ALL_QUERY, query="SELECT c FROM ConceptSystem c")
 public class ConceptSystem implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "ConceptSystem.findAll";
 
     @Id
     @Column(name="concept_system", nullable = false)

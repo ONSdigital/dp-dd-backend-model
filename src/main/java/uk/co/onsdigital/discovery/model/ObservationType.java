@@ -14,9 +14,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = "observation_type")
-@NamedQuery(name = "ObservationType.findAll", query = "SELECT o FROM ObservationType o")
+@NamedQuery(name = ObservationType.FIND_ALL_QUERY, query = "SELECT o FROM ObservationType o")
 public class ObservationType implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "ObservationType.findAll";
 
     @Id
     @Column(name = "observation_type")

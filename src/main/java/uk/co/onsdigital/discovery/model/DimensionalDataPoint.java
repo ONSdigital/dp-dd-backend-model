@@ -16,9 +16,10 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "dimensional_data_point")
-@NamedQuery(name = "DimensionalDataPoint.findAll", query = "SELECT d FROM DimensionalDataPoint d")
+@NamedQuery(name = DimensionalDataPoint.FIND_ALL_QUERY, query = "SELECT d FROM DimensionalDataPoint d")
 public class DimensionalDataPoint implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_QUERY = "DimensionalDataPoint.findAll";
 
     @EmbeddedId
     private DimensionalDataPointPK id;
