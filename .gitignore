@@ -1,3 +1,4 @@
 .idea
 dd-model.iml
 target
+*.DS_Store
