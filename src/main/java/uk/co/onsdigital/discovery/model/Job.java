@@ -9,14 +9,19 @@ import java.util.List;
 @Table(name="job")
 @NamedQueries({
         @NamedQuery(name = Job.COUNT_JOBS_WITH_STATUS, query = "SELECT COUNT(j) FROM Job j WHERE j.status=:status"),
-        @NamedQuery(name = Job.DELETE_JOBS_EXPIRING_BEFORE, query = "DELETE FROM Job j WHERE j.expiryTime < :before")
+        @NamedQuery(name = Job.DELETE_JOBS_EXPIRING_BEFORE, query = "DELETE FROM Job j WHERE j.expiryTime < :before"),
+        @NamedQuery(name = Job.FIND_ONE_QUERY, query = "SELECT j FROM Job j WHERE j.id=:id"),
+        @NamedQuery(name = Job.DELETE_ONE_QUERY, query = "DELETE FROM Job j WHERE j.id=:id")
 })
 public class Job {
     private static final long serialVersionUID = 1L;
     public static final String COUNT_JOBS_WITH_STATUS = "Job.countJobsWithStatus";
     public static final String DELETE_JOBS_EXPIRING_BEFORE = "Job.deleteJobsExpiringBefore";
+    public static final String FIND_ONE_QUERY = "Job.findOne";
+    public static final String DELETE_ONE_QUERY = "Job.deleteOne";
     public static final String STATUS_PARAM = "status";
     public static final String BEFORE_DATE_PARAM = "before";
+    public static final String ID_PARAM = "id";
 
     @Id
     @Column(name = "job_id")

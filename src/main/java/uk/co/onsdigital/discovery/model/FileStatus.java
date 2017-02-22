@@ -20,7 +20,7 @@ public class FileStatus {
     private String url;
 
     @Tolerate
-    FileStatus() {
+    public FileStatus() {
         // Default constructor for JPA
     }
 
