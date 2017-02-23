@@ -24,7 +24,8 @@ import java.util.stream.Stream;
         @NamedQuery(name = DimensionalDataSet.FIND_BY_EDITION_VERSION,
                     query = "SELECT d FROM DimensionalDataSet d " +
                             "WHERE d.majorLabel = :edition AND d.minorVersion = :version AND d.dataResource.id = :dataResource ORDER BY d.s3URL"),
-        @NamedQuery(name = DimensionalDataSet.FIND_BY_ID, query = "SELECT d FROM DimensionalDataSet d WHERE d.id = :id")
+        @NamedQuery(name = DimensionalDataSet.FIND_BY_ID, query = "SELECT d FROM DimensionalDataSet d WHERE d.id = :id"),
+        @NamedQuery(name = DimensionalDataSet.LOOKUP_S3_URL, query = "SELECT d.s3URL FROM DimensionalDataSet d WHERE d.id = :id")
 })
 public class DimensionalDataSet implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -33,6 +34,7 @@ public class DimensionalDataSet implements Serializable {
     public static final String COUNT_QUERY = "DimensionalDataSet.count";
     public static final String FIND_BY_EDITION_VERSION = "DimensionalDataSet.findByEditionVersion";
     public static final String FIND_BY_ID = "DimensionalDataSet.findById";
+    public static final String LOOKUP_S3_URL = "DimensionalDataSet.lookupS3Url";
     public static final String EDITION_PARAM = "edition";
     public static final String VERSION_PARAM = "version";
     public static final String DATA_RESOURCE_PARAM = "dataResource";
