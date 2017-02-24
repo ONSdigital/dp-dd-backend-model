@@ -1,10 +1,10 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Tolerate;
 
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -12,12 +12,7 @@ import java.util.Date;
  * Indicates the status of a particular output file in a job.
  */
 @Data @Entity @Table(name = "file_status")
-@NamedQueries({
-        @NamedQuery(name = FileStatus.DELETE_EXPIRED_FILES, query = "DELETE FROM FileStatus fs WHERE fs.submittedAt < :before")
-})
 public class FileStatus {
-    public static final String DELETE_EXPIRED_FILES = "FileStatus.deleteExpired";
-    public static final String BEFORE_PARAM = "before";
 
     @Id
     private @NonNull String name;
