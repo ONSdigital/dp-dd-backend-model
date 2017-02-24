@@ -1,9 +1,11 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.experimental.Tolerate;
+
+import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -11,6 +13,7 @@ import lombok.experimental.Tolerate;
  */
 @Data @Entity @Table(name = "file_status")
 public class FileStatus {
+
     @Id
     private @NonNull String name;
 
@@ -18,6 +21,10 @@ public class FileStatus {
     private @NonNull Status status = Status.PENDING;
 
     private String url;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "submitted_at")
+    private Date submittedAt;
 
     @Tolerate
     public FileStatus() {
