@@ -17,6 +17,7 @@ import java.util.Date;
 })
 public class FileStatus {
     public static final String DELETE_EXPIRED_FILES = "FileStatus.deleteExpired";
+    public static final String BEFORE_PARAM = "before";
 
     @Id
     private @NonNull String name;
