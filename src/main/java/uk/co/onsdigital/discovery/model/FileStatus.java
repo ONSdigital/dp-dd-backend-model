@@ -28,6 +28,7 @@ public class FileStatus {
     private String url;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "submitted_at")
     private Date submittedAt;
 
     @Tolerate
