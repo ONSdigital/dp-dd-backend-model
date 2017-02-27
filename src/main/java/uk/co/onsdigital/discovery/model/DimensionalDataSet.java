@@ -2,11 +2,8 @@ package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 /**
  * The persistent class for the dimensional_data_set database table.
@@ -124,23 +121,10 @@ public class DimensionalDataSet implements Serializable {
 
     private String source;
 
-    //bi-directional many-to-one association to DimensionalDataPoint
-    @OneToMany(mappedBy = "dimensionalDataSet")
-    private List<DimensionalDataPoint> dimensionalDataPoints;
-
     //bi-directional many-to-one association to DataResource
     @ManyToOne
     @JoinColumn(name = "data_resource")
     private DataResource dataResource;
-
-    //bi-directional many-to-one association to Presentation
-    @OneToMany(mappedBy = "dimensionalDataSet")
-    private List<Presentation> presentations;
-
-    @ManyToMany
-    @JoinTable(name = "dimensional_data_set_concept_system", joinColumns = @JoinColumn(name = "dimensional_data_set_id"),
-            inverseJoinColumns = @JoinColumn(name = "concept_system"))
-    private Set<ConceptSystem> referencedConceptSystems = new HashSet<>();
 
     @OneToMany(mappedBy = "dataSet")
     private List<Dimension> dimensions;
@@ -396,14 +380,6 @@ public class DimensionalDataSet implements Serializable {
         this.source = source;
     }
 
-    public List<DimensionalDataPoint> getDimensionalDataPoints() {
-        return this.dimensionalDataPoints;
-    }
-
-    public void setDimensionalDataPoints(List<DimensionalDataPoint> dimensionalDataPoints) {
-        this.dimensionalDataPoints = dimensionalDataPoints;
-    }
-
     public Long getTotalRowCount() {
         return totalRowCount;
     }
@@ -420,80 +396,12 @@ public class DimensionalDataSet implements Serializable {
         this.majorLabel = majorLabel;
     }
 
-    /**
-     * Returns a list of all {@link ConceptSystem}s that are referenced by any {@link DimensionalDataPoint} in this
-     * data set. These are the <em>dimensions</em> of the data set in terms of the UI.
-     *
-     * @return the list of all referenced concept systems.
-     */
-    public Set<ConceptSystem> getReferencedConceptSystems() {
-        return referencedConceptSystems;
-    }
-
-    public void setReferencedConceptSystems(Set<ConceptSystem> conceptSystems) {
-        this.referencedConceptSystems = conceptSystems;
-    }
-
-    public void addReferencedConceptSystem(ConceptSystem conceptSystem) {
-        if (referencedConceptSystems == null) {
-            referencedConceptSystems = new HashSet<>();
-        }
-        referencedConceptSystems.add(conceptSystem);
-    }
-
-    public Stream<GeographicAreaHierarchy> getReferencedGeographies() {
-        if (getDimensionalDataPoints() != null) {
-            // FIXME: need to populate this during load instead of scanning the entire data point table
-            return getDimensionalDataPoints().parallelStream()
-                    .unordered()
-                    .map(point -> point.getPopulation().getGeographicArea().getGeographicAreaHierarchy())
-                    .distinct();
-        }
-        return Stream.empty();
-    }
-
-    public DimensionalDataPoint addDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
-        getDimensionalDataPoints().add(dimensionalDataPoint);
-        dimensionalDataPoint.setDimensionalDataSet(this);
-
-        return dimensionalDataPoint;
-    }
-
-    public DimensionalDataPoint removeDimensionalDataPoint(DimensionalDataPoint dimensionalDataPoint) {
-        getDimensionalDataPoints().remove(dimensionalDataPoint);
-        dimensionalDataPoint.setDimensionalDataSet(null);
-
-        return dimensionalDataPoint;
-    }
-
     public DataResource getDataResource() {
         return this.dataResource;
     }
 
     public void setDataResource(DataResource dataResource) {
         this.dataResource = dataResource;
-    }
-
-    public List<Presentation> getPresentations() {
-        return this.presentations;
-    }
-
-    public void setPresentations(List<Presentation> presentations) {
-        this.presentations = presentations;
-    }
-
-    public Presentation addPresentation(Presentation presentation) {
-        getPresentations().add(presentation);
-        presentation.setDimensionalDataSet(this);
-
-        return presentation;
-    }
-
-    public Presentation removePresentation(Presentation presentation) {
-        getPresentations().remove(presentation);
-        presentation.setDimensionalDataSet(null);
-
-        return presentation;
     }
 
     public List<Dimension> getDimensions() {
