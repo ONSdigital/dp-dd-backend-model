@@ -13,7 +13,7 @@ public class DataPoint {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    @Column(columnDefinition = "numeric not null")
+    @Column(columnDefinition = "numeric")
     private BigDecimal observation;
 
     @Column(name = "observation_type_value", columnDefinition = "numeric")
@@ -21,6 +21,9 @@ public class DataPoint {
 
     @Column(name = "data_marking")
     private String dataMarking;
+
+    @Column(name = "observation_type_marking")
+    private String observationTypeMarking;
 
     @ManyToMany
     @JoinTable(
@@ -71,5 +74,11 @@ public class DataPoint {
         this.dimensionValues = dimensionValues;
     }
 
+    public String getObservationTypeMarking() {
+        return observationTypeMarking;
+    }
 
+    public void setObservationTypeMarking(String observationTypeMarking) {
+        this.observationTypeMarking = observationTypeMarking;
+    }
 }
