@@ -16,14 +16,11 @@ public class DataPoint {
     @Column(columnDefinition = "numeric")
     private BigDecimal observation;
 
-    @Column(name = "observation_type_value", columnDefinition = "numeric")
-    private BigDecimal observationTypeValue;
+    @Column(name = "observation_type_value")
+    private String observationTypeValue;
 
     @Column(name = "data_marking")
     private String dataMarking;
-
-    @Column(name = "observation_type_marking")
-    private String observationTypeMarking;
 
     @ManyToMany
     @JoinTable(
@@ -50,11 +47,11 @@ public class DataPoint {
         this.observation = observation;
     }
 
-    public BigDecimal getObservationTypeValue() {
+    public String getObservationTypeValue() {
         return observationTypeValue;
     }
 
-    public void setObservationTypeValue(BigDecimal observationTypeValue) {
+    public void setObservationTypeValue(String observationTypeValue) {
         this.observationTypeValue = observationTypeValue;
     }
 
@@ -72,13 +69,5 @@ public class DataPoint {
 
     public void setDimensionValues(List<DimensionValue> dimensionValues) {
         this.dimensionValues = dimensionValues;
-    }
-
-    public String getObservationTypeMarking() {
-        return observationTypeMarking;
-    }
-
-    public void setObservationTypeMarking(String observationTypeMarking) {
-        this.observationTypeMarking = observationTypeMarking;
     }
 }
