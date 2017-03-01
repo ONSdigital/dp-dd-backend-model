@@ -1,0 +1,1 @@
+ALTER TABLE datapoint ALTER COLUMN observation_type_value TYPE varchar(255);
