@@ -1,1 +1,0 @@
-ALTER TABLE datapoint ADD COLUMN observation_type_marking varchar(255);
