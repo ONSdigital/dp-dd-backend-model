@@ -11,8 +11,8 @@ import java.util.Date;
 /**
  * Indicates the status of a particular output file in a job.
  */
-@Data @Entity @Table(name = "file_status")
-public class FileStatus {
+@Data @Entity @Table(name = "file")
+public class File {
 
     @Id
     private @NonNull String name;
@@ -27,7 +27,7 @@ public class FileStatus {
     private Date submittedAt;
 
     @Tolerate
-    public FileStatus() {
+    public File() {
         // Default constructor for JPA
     }
 

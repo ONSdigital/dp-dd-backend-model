@@ -28,8 +28,8 @@ public class DimensionValue {
 
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "dimensional_data_set_id", referencedColumnName = "dimensional_data_set_id", columnDefinition = "uuid not null", nullable = false),
-            @JoinColumn(name = "name", referencedColumnName = "name", nullable = false)
+            @JoinColumn(name = "dimension_data_set_id", referencedColumnName = "data_set_id", columnDefinition = "uuid not null", nullable = false),
+            @JoinColumn(name = "dimension_name", referencedColumnName = "name", nullable = false)
     })
     private Dimension dimension;
 

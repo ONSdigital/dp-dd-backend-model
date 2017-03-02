@@ -24,12 +24,11 @@ public class DataPoint {
 
     @ManyToMany
     @JoinTable(
-            name = "dimension_datapoint"
-            , joinColumns = {@JoinColumn(name = "id")}
+            name = "dimension_value_datapoint"
+            , joinColumns = {@JoinColumn(name = "datapoint_id", referencedColumnName = "id")}
             , inverseJoinColumns = {@JoinColumn(name = "dimension_value_id", referencedColumnName = "id")}
     )
     private List<DimensionValue> dimensionValues;
-
 
     public UUID getId() {
         return id;

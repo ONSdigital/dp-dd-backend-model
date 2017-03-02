@@ -24,15 +24,15 @@ public class Job {
     public static final String ID_PARAM = "id";
 
     @Id
-    @Column(name = "job_id")
+    @Column(name = "id")
     private String id;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.PENDING;
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinTable(name = "job_file_status")
-    private List<FileStatus> files = Collections.emptyList();
+    @JoinTable(name = "job_file")
+    private List<File> files = Collections.emptyList();
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiryTime;
@@ -53,11 +53,11 @@ public class Job {
         this.id = id;
     }
 
-    public List<FileStatus> getFiles() {
+    public List<File> getFiles() {
         return files;
     }
 
-    public void setFiles(List<FileStatus> files) {
+    public void setFiles(List<File> files) {
         this.files = files;
     }
 
