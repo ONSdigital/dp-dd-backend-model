@@ -9,7 +9,7 @@ import java.util.UUID;
  * The persistent class for the dimensional_data_set database table.
  */
 @Entity
-@Table(name = "dimensional_data_set",
+@Table(name = "data_set",
        indexes = {
         @Index(name = "editions", columnList = "data_resource,major_label,minor_version", unique = false),
         @Index(name = "versions", columnList = "data_resource,major_version,minor_version", unique = true),
