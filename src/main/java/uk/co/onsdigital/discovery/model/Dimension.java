@@ -29,11 +29,7 @@ public class Dimension {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @OneToMany
-    @JoinColumns({
-            @JoinColumn(name = "data_set_id", referencedColumnName = "data_set_id", columnDefinition = "uuid", insertable = false, updatable = false),
-            @JoinColumn(name = "name", referencedColumnName = "name", insertable = false, updatable = false)
-    })
+    @OneToMany(mappedBy="dimension")
     private List<DimensionValue> values;
 
     public Dimension() {

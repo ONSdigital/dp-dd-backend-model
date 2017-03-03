@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"data_set_id", "name", "value"}))
+@Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimension_data_set_id", "dimension_name", "value"}))
 @NamedQueries({
-        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dim FROM DimensionValue dim WHERE dim.dimension.dataSet.id = :ddsId AND dim.dimension.name = :name AND dim.value = :value")
+        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dimVal FROM DimensionValue dimVal WHERE dimVal.dimension.dataSet.id = :ddsId AND dimVal.dimension.name = :name AND dimVal.value = :value")
 })
 public class DimensionValue {
 
