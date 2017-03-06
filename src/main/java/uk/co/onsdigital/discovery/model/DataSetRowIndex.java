@@ -10,30 +10,30 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.UUID;
 
-import static uk.co.onsdigital.discovery.model.DimensionalDataSetRowIndex.COUNT_QUERY;
-import static uk.co.onsdigital.discovery.model.DimensionalDataSetRowIndex.DELETE_QUERY;
+import static uk.co.onsdigital.discovery.model.DataSetRowIndex.COUNT_QUERY;
+import static uk.co.onsdigital.discovery.model.DataSetRowIndex.DELETE_QUERY;
 
 @Entity
-@Table(name = "dimensional_data_set_row_index")
+@Table(name = "data_set_row_index")
 @NamedQueries({
-        @NamedQuery(name = COUNT_QUERY, query = "SELECT COUNT(r) FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId"),
-        @NamedQuery(name = DELETE_QUERY, query = "DELETE FROM DimensionalDataSetRowIndex r WHERE r.datasetId = :datasetId")
+        @NamedQuery(name = COUNT_QUERY, query = "SELECT COUNT(r) FROM DataSetRowIndex r WHERE r.datasetId = :datasetId"),
+        @NamedQuery(name = DELETE_QUERY, query = "DELETE FROM DataSetRowIndex r WHERE r.datasetId = :datasetId")
 })
-@IdClass(DimensionalDataSetRowIndex.RowIndexId.class)
-public class DimensionalDataSetRowIndex implements Serializable {
+@IdClass(DataSetRowIndex.RowIndexId.class)
+public class DataSetRowIndex implements Serializable {
     //default serial version id, required for serializable classes.
     private static final long serialVersionUID = 1L;
 
     // The query to count the number of rows processed for a dataset.
-    public static final String COUNT_QUERY = "DimensionalDataSetRowIndex.countForDataset";
+    public static final String COUNT_QUERY = "DataSetRowIndex.countForDataset";
     // The query to delete row indexes for a dataset.
-    public static final String DELETE_QUERY = "DimensionalDataSetRowIndex.deleteForDataset";
+    public static final String DELETE_QUERY = "DataSetRowIndex.deleteForDataset";
 
     // The name of the dataset parameter to pass for both queries.
     public static final String DATASET_PARAMETER = "datasetId";
 
     @Id
-    @Column(name = "dimensional_data_set_id", columnDefinition = "uuid")
+    @Column(name = "data_set_id", columnDefinition = "uuid")
     private UUID datasetId;
 
     @Id

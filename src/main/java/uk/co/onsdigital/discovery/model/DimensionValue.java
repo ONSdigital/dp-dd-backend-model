@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimensional_data_set_id", "name", "value"}))
+@Table(name = "dimension_value", uniqueConstraints = @UniqueConstraint(columnNames={"dimension_data_set_id", "dimension_name", "value"}))
 @NamedQueries({
-        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dim FROM DimensionValue dim WHERE dim.dimension.dataSet.id = :ddsId AND dim.dimension.name = :name AND dim.value = :value")
+        @NamedQuery(name = DimensionValue.FIND_QUERY, query = "SELECT dimVal FROM DimensionValue dimVal WHERE dimVal.dimension.dataSet.id = :ddsId AND dimVal.dimension.name = :name AND dimVal.value = :value")
 })
 public class DimensionValue {
 
@@ -28,8 +28,8 @@ public class DimensionValue {
 
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "dimensional_data_set_id", referencedColumnName = "dimensional_data_set_id", columnDefinition = "uuid not null", nullable = false),
-            @JoinColumn(name = "name", referencedColumnName = "name", nullable = false)
+            @JoinColumn(name = "dimension_data_set_id", referencedColumnName = "data_set_id", columnDefinition = "uuid not null", nullable = false),
+            @JoinColumn(name = "dimension_name", referencedColumnName = "name", nullable = false)
     })
     private Dimension dimension;
 

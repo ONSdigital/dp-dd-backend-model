@@ -19,8 +19,8 @@ public class Dimension {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "dimensional_data_set_id", columnDefinition = "uuid")
-    private DimensionalDataSet dataSet;
+    @JoinColumn(name = "data_set_id", columnDefinition = "uuid")
+    private DataSet dataSet;
 
     @Id
     @Column(name = "name")
@@ -29,28 +29,24 @@ public class Dimension {
     @Column(name = "type", nullable = false)
     private String type;
 
-    @OneToMany
-    @JoinColumns({
-            @JoinColumn(name = "dimensional_data_set_id", referencedColumnName = "dimensional_data_set_id", columnDefinition = "uuid", insertable = false, updatable = false),
-            @JoinColumn(name = "name", referencedColumnName = "name", insertable = false, updatable = false)
-    })
+    @OneToMany(mappedBy="dimension")
     private List<DimensionValue> values;
 
     public Dimension() {
         // Default constructor for JPA
     }
 
-    public Dimension(DimensionalDataSet dataSet, String name, DimensionValue... values) {
+    public Dimension(DataSet dataSet, String name, DimensionValue... values) {
         this.dataSet = dataSet;
         this.name = name;
         this.values = Stream.of(values).peek(value -> value.setDimension(this)).collect(toList());
     }
 
-    public DimensionalDataSet getDataSet() {
+    public DataSet getDataSet() {
         return dataSet;
     }
 
-    public void setDataSet(DimensionalDataSet dataSet) {
+    public void setDataSet(DataSet dataSet) {
         this.dataSet = dataSet;
     }
 
@@ -103,7 +99,7 @@ public class Dimension {
             // Default constructor for JPA
         }
 
-        public DimensionPK(DimensionalDataSet dataSet, String name) {
+        public DimensionPK(DataSet dataSet, String name) {
             this.dataSet = dataSet.getId();
             this.name = name;
         }

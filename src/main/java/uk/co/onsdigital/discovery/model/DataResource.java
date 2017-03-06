@@ -41,7 +41,7 @@ public class DataResource implements Serializable {
     //bi-directional many-to-one association to DimensionalDataSet
     @OneToMany(mappedBy = "dataResource", cascade = CascadeType.PERSIST)
     @OrderBy("majorVersion DESC, minorVersion DESC")
-    private List<DimensionalDataSet> dimensionalDataSets;
+    private List<DataSet> dataSets;
 
     public DataResource() {
     }
@@ -86,26 +86,26 @@ public class DataResource implements Serializable {
         this.title = title;
     }
 
-    public List<DimensionalDataSet> getDimensionalDataSets() {
-        return this.dimensionalDataSets;
+    public List<DataSet> getDataSets() {
+        return this.dataSets;
     }
 
-    public void setDimensionalDataSets(List<DimensionalDataSet> dimensionalDataSets) {
-        this.dimensionalDataSets = dimensionalDataSets;
+    public void setDataSets(List<DataSet> dataSets) {
+        this.dataSets = dataSets;
     }
 
-    public DimensionalDataSet addDimensionalDataSet(DimensionalDataSet dimensionalDataSet) {
-        getDimensionalDataSets().add(dimensionalDataSet);
-        dimensionalDataSet.setDataResource(this);
+    public DataSet addDimensionalDataSet(DataSet dataSet) {
+        getDataSets().add(dataSet);
+        dataSet.setDataResource(this);
 
-        return dimensionalDataSet;
+        return dataSet;
     }
 
-    public DimensionalDataSet removeDimensionalDataSet(DimensionalDataSet dimensionalDataSet) {
-        getDimensionalDataSets().remove(dimensionalDataSet);
-        dimensionalDataSet.setDataResource(null);
+    public DataSet removeDimensionalDataSet(DataSet dataSet) {
+        getDataSets().remove(dataSet);
+        dataSet.setDataResource(null);
 
-        return dimensionalDataSet;
+        return dataSet;
     }
 
     @Override
