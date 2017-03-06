@@ -11,13 +11,13 @@ import java.util.List;
 @Entity
 @Table(name = "data_resource")
 @NamedQueries({
-        @NamedQuery(name = DataResource.FIND_ALL_QUERY, query = "SELECT d FROM DataResource d"),
-        @NamedQuery(name = DataResource.COUNT_ALL, query = "SELECT Count(d) FROM DataResource d")
+        @NamedQuery(name = DataResource.FIND_ACTIVE_QUERY, query = "SELECT DISTINCT ds.dataResource FROM DataSet ds WHERE ds.status = 'complete' ORDER BY ds.dataResource.title"),
+        @NamedQuery(name = DataResource.COUNT_ACTIVE, query = "SELECT COUNT(DISTINCT ds.dataResource) FROM DataSet ds WHERE ds.status = 'complete'")
 })
 public class DataResource implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String FIND_ALL_QUERY = "DataResource.findAll";
-    public static final String COUNT_ALL = "DataResource.count";
+    public static final String FIND_ACTIVE_QUERY = "DataResource.findActive";
+    public static final String COUNT_ACTIVE = "DataResource.countActive";
 
     public DataResource(String id, String title) {
         this.id = id;

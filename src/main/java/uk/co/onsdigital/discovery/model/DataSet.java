@@ -16,22 +16,22 @@ import java.util.UUID;
        }
 )
 @NamedQueries({
-        @NamedQuery(name = DataSet.FIND_ALL_QUERY, query = "SELECT d FROM DataSet d ORDER BY d.s3URL"),
-        @NamedQuery(name = DataSet.COUNT_QUERY, query = "SELECT COUNT(d) FROM DataSet d"),
+        @NamedQuery(name = DataSet.FIND_ACTIVE_QUERY, query = "SELECT d FROM DataSet d WHERE d.status = 'complete' ORDER BY d.s3URL"),
+        @NamedQuery(name = DataSet.COUNT_ACTIVE_QUERY, query = "SELECT COUNT(d) FROM DataSet d WHERE d.status = 'complete'"),
         @NamedQuery(name = DataSet.FIND_BY_EDITION_VERSION,
                     query = "SELECT d FROM DataSet d " +
-                            "WHERE d.majorLabel = :edition AND d.minorVersion = :version AND d.dataResource.id = :dataResource ORDER BY d.s3URL"),
+                            "WHERE d.majorLabel = :edition AND d.minorVersion = :version AND d.dataResource.id = :dataResource AND d.status = 'complete' ORDER BY d.s3URL"),
         @NamedQuery(name = DataSet.FIND_BY_ID, query = "SELECT d FROM DataSet d WHERE d.id = :id"),
         @NamedQuery(name = DataSet.LOOKUP_S3_URL, query = "SELECT d.s3URL FROM DataSet d WHERE d.id = :id")
 })
 public class DataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final String FIND_ALL_QUERY = "DimensionalDataSet.findAll";
-    public static final String COUNT_QUERY = "DimensionalDataSet.count";
-    public static final String FIND_BY_EDITION_VERSION = "DimensionalDataSet.findByEditionVersion";
-    public static final String FIND_BY_ID = "DimensionalDataSet.findById";
-    public static final String LOOKUP_S3_URL = "DimensionalDataSet.lookupS3Url";
+    public static final String FIND_ACTIVE_QUERY = "DataSet.findActive";
+    public static final String COUNT_ACTIVE_QUERY = "DataSet.countActive";
+    public static final String FIND_BY_EDITION_VERSION = "DataSet.findByEditionVersion";
+    public static final String FIND_BY_ID = "DataSet.findById";
+    public static final String LOOKUP_S3_URL = "DataSet.lookupS3Url";
     public static final String EDITION_PARAM = "edition";
     public static final String VERSION_PARAM = "version";
     public static final String DATA_RESOURCE_PARAM = "dataResource";
