@@ -26,7 +26,6 @@ public class DimensionValue {
 
     @Id
     @Column(columnDefinition = "uuid")
-    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @ManyToOne

@@ -1,8 +1,6 @@
 package uk.co.onsdigital.discovery.model;
 
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,7 +11,6 @@ public class DataPoint {
 
     @Id
     @Column(columnDefinition = "uuid")
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @Column(columnDefinition = "numeric")

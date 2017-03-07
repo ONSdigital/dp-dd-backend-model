@@ -1,7 +1,5 @@
 package uk.co.onsdigital.discovery.model;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -22,7 +20,6 @@ public class Dimension {
     @Id
     @ManyToOne
     @JoinColumn(name = "data_set_id", columnDefinition = "uuid")
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
     private DataSet dataSet;
 
     @Id
@@ -96,7 +93,6 @@ public class Dimension {
     public static class DimensionPK implements Serializable {
         private static final long serialVersionUID = 1L;
 
-        @Type(type = "org.hibernate.type.PostgresUUIDType")
         private UUID dataSet;
         private String name;
 

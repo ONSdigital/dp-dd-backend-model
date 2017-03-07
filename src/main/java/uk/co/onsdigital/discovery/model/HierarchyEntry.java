@@ -35,7 +35,6 @@ public class HierarchyEntry {
 
     @Id
     @Column(columnDefinition = "uuid")
-    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @Column(nullable = false)

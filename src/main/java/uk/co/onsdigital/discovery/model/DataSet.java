@@ -44,7 +44,6 @@ public class DataSet implements Serializable {
 
     @Id
     @Column(name = "id", columnDefinition = "uuid")
-    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @Column(columnDefinition = "text")
