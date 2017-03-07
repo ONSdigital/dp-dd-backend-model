@@ -20,6 +20,7 @@ public class Dimension {
     @Id
     @ManyToOne
     @JoinColumn(name = "data_set_id", columnDefinition = "uuid")
+    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private DataSet dataSet;
 
     @Id

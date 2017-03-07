@@ -11,6 +11,7 @@ public class DataPoint {
 
     @Id
     @Column(columnDefinition = "uuid")
+    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @Column(columnDefinition = "numeric")

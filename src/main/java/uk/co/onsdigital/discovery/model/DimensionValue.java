@@ -1,7 +1,9 @@
 package uk.co.onsdigital.discovery.model;
 
-import org.eclipse.persistence.annotations.JoinFetch;
-import org.eclipse.persistence.annotations.JoinFetchType;
+//import org.eclipse.persistence.annotations.JoinFetch;
+//import org.eclipse.persistence.annotations.JoinFetchType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -24,6 +26,7 @@ public class DimensionValue {
 
     @Id
     @Column(columnDefinition = "uuid")
+    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @ManyToOne
@@ -38,7 +41,8 @@ public class DimensionValue {
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_entry_id")
-    @JoinFetch(JoinFetchType.OUTER)
+//    @JoinFetch(JoinFetchTypepe.OUTER)
+    @Fetch(FetchMode.JOIN)
     private HierarchyEntry hierarchyEntry;
 
     public DimensionValue() {

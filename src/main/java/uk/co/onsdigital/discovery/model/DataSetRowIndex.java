@@ -34,6 +34,7 @@ public class DataSetRowIndex implements Serializable {
 
     @Id
     @Column(name = "data_set_id", columnDefinition = "uuid")
+    @org.hibernate.annotations.Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID datasetId;
 
     @Id
