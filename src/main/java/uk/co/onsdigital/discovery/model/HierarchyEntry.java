@@ -48,7 +48,6 @@ public class HierarchyEntry {
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_level_type_id")
-//    @JoinFetch(JoinFetchType.OUTER)
     @Fetch(FetchMode.JOIN)
     private HierarchyLevelType levelType;
 
@@ -59,7 +58,6 @@ public class HierarchyEntry {
     // bi-directional many-to-one relationship defining the trees structure. This is the owner side.
     @ManyToOne
     @JoinColumn(name = "parent", referencedColumnName = "id")
-//    @JoinFetch(JoinFetchType.OUTER)
     @Fetch(FetchMode.JOIN)
     private HierarchyEntry parent;
 

@@ -40,7 +40,6 @@ public class DimensionValue {
 
     @ManyToOne
     @JoinColumn(name = "hierarchy_entry_id")
-//    @JoinFetch(JoinFetchTypepe.OUTER)
     @Fetch(FetchMode.JOIN)
     private HierarchyEntry hierarchyEntry;
 
