@@ -1,7 +1,7 @@
 package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.*;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class Job {
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "job_file")
-    private List<File> files = Collections.emptyList();
+    private List<File> files = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiryTime;
