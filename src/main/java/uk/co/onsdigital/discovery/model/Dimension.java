@@ -1,9 +1,7 @@
 package uk.co.onsdigital.discovery.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -13,16 +11,27 @@ import static java.util.stream.Collectors.toList;
  * A dimension in a dataset.
  */
 @Entity
-@Table(name = "dimension")
-@IdClass(Dimension.DimensionPK.class)
+@Table(name = "dimension", uniqueConstraints = {
+        @UniqueConstraint(name = "unq_dimension_data_set_id_name", columnNames = {"data_set_id", "name"})
+})
+@NamedQueries({
+        @NamedQuery(
+                name = Dimension.FIND_BY_DATA_SET_AND_NAME,
+                query = "SELECT d FROM Dimension d WHERE d.dataSet.id = :dataSetId AND d.name = :name"
+        )
+})
 public class Dimension {
+    public static final String FIND_BY_DATA_SET_AND_NAME = "Dimension.findByDataSetAndName";
+    public static final String DATA_SET_PARAM = "dataSetId";
+    public static final String NAME_PARAM = "name";
 
     @Id
+    private UUID id;
+
     @ManyToOne
     @JoinColumn(name = "data_set_id", columnDefinition = "uuid")
     private DataSet dataSet;
 
-    @Id
     @Column(name = "name")
     private String name;
 
@@ -40,6 +49,14 @@ public class Dimension {
         this.dataSet = dataSet;
         this.name = name;
         this.values = Stream.of(values).peek(value -> value.setDimension(this)).collect(toList());
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public DataSet getDataSet() {
@@ -85,37 +102,6 @@ public class Dimension {
                 ", name='" + name + "'" +
                 ", type='" + type + "'" +
                 '}';
-    }
-
-    /**
-     * Composite primary key class.
-     */
-    public static class DimensionPK implements Serializable {
-        private static final long serialVersionUID = 1L;
-
-        private UUID dataSet;
-        private String name;
-
-        public DimensionPK() {
-            // Default constructor for JPA
-        }
-
-        public DimensionPK(DataSet dataSet, String name) {
-            this.dataSet = dataSet.getId();
-            this.name = name;
-        }
-
-        @Override
-        public boolean equals(Object that) {
-            return this == that || that instanceof DimensionPK
-                    && Objects.equals(this.name, ((DimensionPK) that).name)
-                    && Objects.equals(this.dataSet, ((DimensionPK) that).dataSet);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(dataSet, name);
-        }
     }
 
 }
