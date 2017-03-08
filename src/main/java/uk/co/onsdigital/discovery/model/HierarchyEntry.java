@@ -1,7 +1,5 @@
 package uk.co.onsdigital.discovery.model;
 
-//import org.eclipse.persistence.annotations.JoinFetch;
-//import org.eclipse.persistence.annotations.JoinFetchType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
