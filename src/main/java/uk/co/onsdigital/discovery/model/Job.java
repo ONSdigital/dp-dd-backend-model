@@ -30,7 +30,7 @@ public class Job {
     @Enumerated(EnumType.STRING)
     private Status status = Status.PENDING;
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(name = "job_file")
     private List<File> files = new ArrayList<>();
 
