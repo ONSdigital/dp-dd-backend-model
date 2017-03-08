@@ -1,9 +1,6 @@
 package uk.co.onsdigital.discovery.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * The persistent class for the hierarchy_level_type database table.

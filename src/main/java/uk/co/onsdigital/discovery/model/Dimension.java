@@ -92,6 +92,7 @@ public class Dimension {
      */
     public static class DimensionPK implements Serializable {
         private static final long serialVersionUID = 1L;
+
         private UUID dataSet;
         private String name;
 

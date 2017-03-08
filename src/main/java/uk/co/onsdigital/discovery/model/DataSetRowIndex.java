@@ -75,5 +75,29 @@ public class DataSetRowIndex implements Serializable {
         public void setRowIndex(Long rowIndex) {
             this.rowIndex = rowIndex;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            RowIndexId that = (RowIndexId) o;
+
+            if (datasetId != null ? !datasetId.equals(that.datasetId) : that.datasetId != null) {
+                return false;
+            }
+            return rowIndex != null ? rowIndex.equals(that.rowIndex) : that.rowIndex == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = datasetId != null ? datasetId.hashCode() : 0;
+            result = 31 * result + (rowIndex != null ? rowIndex.hashCode() : 0);
+            return result;
+        }
     }
 }
