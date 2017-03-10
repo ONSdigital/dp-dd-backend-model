@@ -31,6 +31,7 @@ public class DataResource implements Serializable {
     @Column(name = "column_concept")
     private String columnConcept;
 
+    @Column(columnDefinition = "text")
     private String metadata;
 
     @Column(name = "row_concept")
