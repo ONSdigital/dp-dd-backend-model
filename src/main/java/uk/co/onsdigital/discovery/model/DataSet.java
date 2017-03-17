@@ -26,7 +26,7 @@ import java.util.UUID;
 })
 @NamedNativeQueries({
         @NamedNativeQuery(name=DataSet.INSERT_PROCESSED_COUNT_QUERY, query = "INSERT INTO data_set_processed_count (data_set_id, processed_count) VALUES (:id, :count) ON CONFLICT DO NOTHING"),
-        @NamedNativeQuery(name=DataSet.UPDATE_PROCESSED_COUNT_QUERY, query = "UPDATE data_set_processed_count set processed_count = (SELECT processed_count FROM data_set_processed_count WHERE data_set_id = :id FOR UPDATE) + :count WHERE data_set_id = :id"),
+        @NamedNativeQuery(name=DataSet.UPDATE_PROCESSED_COUNT_QUERY, query = "UPDATE data_set_processed_count set processed_count = (processed_count + :count) WHERE data_set_id = :id"),
         @NamedNativeQuery(name=DataSet.GET_PROCESSED_COUNT_QUERY, query = "SELECT processed_count FROM data_set_processed_count WHERE data_set_id = :id")
 })
 public class DataSet implements Serializable {
