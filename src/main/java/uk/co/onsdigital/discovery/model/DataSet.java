@@ -24,6 +24,11 @@ import java.util.UUID;
         @NamedQuery(name = DataSet.FIND_BY_ID, query = "SELECT d FROM DataSet d WHERE d.id = :id"),
         @NamedQuery(name = DataSet.LOOKUP_S3_URL, query = "SELECT d.s3URL FROM DataSet d WHERE d.id = :id")
 })
+@NamedNativeQueries({
+        @NamedNativeQuery(name=DataSet.INSERT_PROCESSED_COUNT_QUERY, query = "INSERT INTO data_set_processed_count (data_set_id, processed_count) VALUES (:id, :count) ON CONFLICT DO NOTHING"),
+        @NamedNativeQuery(name=DataSet.UPDATE_PROCESSED_COUNT_QUERY, query = "UPDATE data_set_processed_count set processed_count = (processed_count + :count) WHERE data_set_id = :id"),
+        @NamedNativeQuery(name=DataSet.GET_PROCESSED_COUNT_QUERY, query = "SELECT processed_count FROM data_set_processed_count WHERE data_set_id = :id")
+})
 public class DataSet implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -32,10 +37,14 @@ public class DataSet implements Serializable {
     public static final String FIND_BY_EDITION_VERSION = "DataSet.findByEditionVersion";
     public static final String FIND_BY_ID = "DataSet.findById";
     public static final String LOOKUP_S3_URL = "DataSet.lookupS3Url";
+    public static final String INSERT_PROCESSED_COUNT_QUERY = "DataSet.insertProcessedCount";
+    public static final String UPDATE_PROCESSED_COUNT_QUERY = "DataSet.updateProcessedCount";
+    public static final String GET_PROCESSED_COUNT_QUERY = "DataSet.getProcessedCount";
     public static final String EDITION_PARAM = "edition";
     public static final String VERSION_PARAM = "version";
     public static final String DATA_RESOURCE_PARAM = "dataResource";
     public static final String ID_PARAM = "id";
+    public static final String COUNT_PARAM = "count";
 
     // The status of a dataset when created, until all rows have been ingested
     public static final String STATUS_NEW = "new";
