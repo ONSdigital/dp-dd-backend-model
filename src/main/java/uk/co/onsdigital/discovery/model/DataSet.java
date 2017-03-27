@@ -25,9 +25,8 @@ import java.util.UUID;
         @NamedQuery(name = DataSet.LOOKUP_S3_URL, query = "SELECT d.s3URL FROM DataSet d WHERE d.id = :id")
 })
 @NamedNativeQueries({
-        @NamedNativeQuery(name=DataSet.INSERT_PROCESSED_COUNT_QUERY, query = "INSERT INTO data_set_processed_count (data_set_id, processed_count) VALUES (:id, :count) ON CONFLICT DO NOTHING"),
-        @NamedNativeQuery(name=DataSet.UPDATE_PROCESSED_COUNT_QUERY, query = "UPDATE data_set_processed_count set processed_count = (processed_count + :count) WHERE data_set_id = :id"),
-        @NamedNativeQuery(name=DataSet.GET_PROCESSED_COUNT_QUERY, query = "SELECT processed_count FROM data_set_processed_count WHERE data_set_id = :id")
+        @NamedNativeQuery(name=DataSet.UPDATE_PROCESSED_COUNT_QUERY, query = "UPDATE data_set set processed_count = (processed_count + :count) WHERE id = :id"),
+        @NamedNativeQuery(name=DataSet.GET_PROCESSED_COUNT_QUERY, query = "SELECT processed_count FROM data_set WHERE id = :id")
 })
 public class DataSet implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -37,7 +36,6 @@ public class DataSet implements Serializable {
     public static final String FIND_BY_EDITION_VERSION = "DataSet.findByEditionVersion";
     public static final String FIND_BY_ID = "DataSet.findById";
     public static final String LOOKUP_S3_URL = "DataSet.lookupS3Url";
-    public static final String INSERT_PROCESSED_COUNT_QUERY = "DataSet.insertProcessedCount";
     public static final String UPDATE_PROCESSED_COUNT_QUERY = "DataSet.updateProcessedCount";
     public static final String GET_PROCESSED_COUNT_QUERY = "DataSet.getProcessedCount";
     public static final String EDITION_PARAM = "edition";
@@ -89,6 +87,17 @@ public class DataSet implements Serializable {
 
     @OneToMany(mappedBy = "dataSet")
     private List<Dimension> dimensions;
+
+    @Column(name = "total_row_count")
+    private Long totalRowCount;
+
+    public DataSet() {
+    }
+
+    public DataSet(String s3URL, DataResource dataResource) {
+        this.s3URL = s3URL;
+        this.dataResource = dataResource;
+    }
 
     public String getMetadata() {
         return metadata;
@@ -172,17 +181,6 @@ public class DataSet implements Serializable {
 
     public void setTotalRowCount(Long totalRowCount) {
         this.totalRowCount = totalRowCount;
-    }
-
-    @Column(name = "total_row_count")
-    private Long totalRowCount;
-
-    public DataSet() {
-    }
-
-    public DataSet(String s3URL, DataResource dataResource) {
-        this.s3URL = s3URL;
-        this.dataResource = dataResource;
     }
 
     public UUID getId() {
