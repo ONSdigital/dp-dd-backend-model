@@ -16,7 +16,7 @@ public class DataPoint {
     private UUID datasetId;
 
     @Id
-    @Column(name="row_index")
+    @Column(name = "row_index")
     private Long rowIndex;
 
     @Column(columnDefinition = "numeric")
@@ -32,7 +32,7 @@ public class DataPoint {
     @JoinTable(
             name = "dimension_value_datapoint"
             , joinColumns = {@JoinColumn(name = "data_set_id", referencedColumnName = "data_set_id"),
-                             @JoinColumn(name="row_index", referencedColumnName = "row_index")}
+            @JoinColumn(name = "row_index", referencedColumnName = "row_index")}
             , inverseJoinColumns = {@JoinColumn(name = "dimension_value_id", referencedColumnName = "id")}
     )
     private List<DimensionValue> dimensionValues;
@@ -103,6 +103,24 @@ public class DataPoint {
 
         public void setRowIndex(Long rowIndex) {
             this.rowIndex = rowIndex;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            DatapointKey that = (DatapointKey) o;
+
+            if (datasetId != null ? !datasetId.equals(that.datasetId) : that.datasetId != null) return false;
+            return rowIndex != null ? rowIndex.equals(that.rowIndex) : that.rowIndex == null;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = datasetId != null ? datasetId.hashCode() : 0;
+            result = 31 * result + (rowIndex != null ? rowIndex.hashCode() : 0);
+            return result;
         }
     }
 }
