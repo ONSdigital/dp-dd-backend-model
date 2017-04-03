@@ -2,22 +2,16 @@ package uk.co.onsdigital.discovery.model;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@IdClass(DataPoint.DatapointKey.class)
 public class DataPoint {
 
     @Id
-    @Column(columnDefinition = "uuid", name = "data_set_id")
-    private UUID datasetId;
-
-    @Id
-    @Column(name="row_index")
-    private Long rowIndex;
+    @Column(columnDefinition = "uuid")
+    private UUID id;
 
     @Column(columnDefinition = "numeric")
     private BigDecimal observation;
@@ -31,26 +25,17 @@ public class DataPoint {
     @ManyToMany
     @JoinTable(
             name = "dimension_value_datapoint"
-            , joinColumns = {@JoinColumn(name = "data_set_id", referencedColumnName = "data_set_id"),
-                             @JoinColumn(name="row_index", referencedColumnName = "row_index")}
+            , joinColumns = {@JoinColumn(name = "datapoint_id", referencedColumnName = "id")}
             , inverseJoinColumns = {@JoinColumn(name = "dimension_value_id", referencedColumnName = "id")}
     )
     private List<DimensionValue> dimensionValues;
 
-    public UUID getDatasetId() {
-        return datasetId;
+    public UUID getId() {
+        return id;
     }
 
-    public void setDatasetId(UUID datasetId) {
-        this.datasetId = datasetId;
-    }
-
-    public Long getRowIndex() {
-        return rowIndex;
-    }
-
-    public void setRowIndex(Long rowIndex) {
-        this.rowIndex = rowIndex;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public BigDecimal getObservation() {
@@ -83,26 +68,5 @@ public class DataPoint {
 
     public void setDimensionValues(List<DimensionValue> dimensionValues) {
         this.dimensionValues = dimensionValues;
-    }
-
-    public static class DatapointKey implements Serializable {
-        private UUID datasetId;
-        private Long rowIndex;
-
-        public UUID getDatasetId() {
-            return datasetId;
-        }
-
-        public void setDatasetId(UUID datasetId) {
-            this.datasetId = datasetId;
-        }
-
-        public Long getRowIndex() {
-            return rowIndex;
-        }
-
-        public void setRowIndex(Long rowIndex) {
-            this.rowIndex = rowIndex;
-        }
     }
 }
